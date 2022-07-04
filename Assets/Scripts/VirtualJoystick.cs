@@ -21,9 +21,6 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public float sensitivity = 1f;
 
-    public enum JoystickType { Move, Rotate } //열거형으로 조이스틱 타입을 만들고 조익스틱마다 처리.
-    public JoystickType joystickType; //변수 생성
-
     private void Awake()
     {
         joystick = GetComponent<RectTransform>(); //컴포넌트 불러오기
@@ -47,15 +44,7 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         lever.anchoredPosition = Vector2.zero; //레버 중심으로.
         isInput = false;
-        switch(joystickType)
-        {
-            case JoystickType.Move: //Move
-                controller.Move(Vector2.zero);
-                break;
-                
-            case JoystickType.Rotate: //Rotate
-                break;
-        }
+        controller.Move(Vector2.zero);
     }
 
     private void ControlJoystickLever(PointerEventData eventData)
@@ -70,16 +59,7 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private void InputControlVector()
     {
         // 캐릭터에게 입력벡터를 전달
-        switch(joystickType)
-        {
-            case JoystickType.Move:
-                controller.Move(inputDirection * sensitivity);
-                break;
-
-            case JoystickType.Rotate:
-                controller.Rotate(inputDirection * sensitivity);
-                break;
-        }
+        controller.Move(inputDirection * sensitivity);
         //Debug.Log(inputDirection.x + " / " + inputDirection.y); 입력받은 벡터의 값
     }
 

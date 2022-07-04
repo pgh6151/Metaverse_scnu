@@ -8,9 +8,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField]
     private Transform characterBody; //캐릭터
-    [SerializeField]
-    private Transform moveCamera; //카메라
-
     Animator animator;
 
     //건하 수정 포톤뷰에서 부드러운 움직임을 위한 추가
@@ -54,7 +51,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         else if ((transform.position - curPos).sqrMagnitude >= 100)transform.position = curPos;  // 위치동기화 시키는 부분
         else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
 
-
     }
 
     public void Move(Vector2 inputDirection)
@@ -80,31 +76,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             transform.position += moveDir * Time.deltaTime * 5f;
         }
     }
-    
-    public void Rotate(Vector3 inputDirection)
-    {
-        //이동 값
-        Vector2 moveDelta = inputDirection;
-        // 카메라의 원래 각도를 오일러 각으로 저장
-        Vector3 camAngle = moveCamera.rotation.eulerAngles;
-        // 카메라의 회전 값 계산
-        float x = camAngle.x - moveDelta.y;
-
-        // 카메라 회전 값을 제한
-        if (x < 180f)
-        {
-            x = Mathf.Clamp(x, -1f, 20f);
-        }
-        else
-        {
-            x = Mathf.Clamp(x, 335f, 390f);
-        }
-
-        // moveCamera 회전 시키기. Euler로 변환
-        moveCamera.rotation = Quaternion.Euler(x, camAngle.y + moveDelta.x, camAngle.z);
-    }
-
-
+ 
     //변수동기화 필요시 여기에서 제어
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
