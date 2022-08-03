@@ -10,7 +10,7 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private RectTransform lever;
     private RectTransform joystick;
 
-    [SerializeField, Range(10, 150)]
+    [SerializeField, Range(10, 200)]
     private float leverRange; //레버 범위 제한
 
     private Vector2 inputDirection;
@@ -74,7 +74,4 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             InputControlVector();
         }
     }
-
-
-
 }
