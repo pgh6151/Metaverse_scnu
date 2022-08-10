@@ -15,8 +15,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region
     private void Awake() 
     {
-        //화면비율 조정필요
-        Screen.SetResolution(2160, 1080, false);
+        //화면비율 조정필요. 16:9 비율
+        Screen.SetResolution(Screen.width, (Screen.width * 16) / 9 , true);
         DontDestroyOnLoad(gameObject);
         scene = SceneManager.GetActiveScene();
     }
