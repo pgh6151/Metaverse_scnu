@@ -10,11 +10,15 @@ public class LookRotate : MonoBehaviour
     float clamp_x;
     float clamp_y;
     public Transform Player;
-    private CamRot rot;
     Vector3 currentAngles;
+    Vector3 SavePos;
+    Vector3 SPos;
 
     [SerializeField]
     float distance = 5f;
+
+    [SerializeField]
+    private CamRot rot;
 
     [SerializeField]
     float sensitivity = 50f;
@@ -32,23 +36,41 @@ public class LookRotate : MonoBehaviour
             rotate_y = -movedPos.x / Screen.width * sensitivity;
             clamp_x = Mathf.Clamp(rotate_x, -30, 30);
             clamp_y = Mathf.Clamp(rotate_y, -50, 50);
+            currentAngles = new Vector3(clamp_x, clamp_y, 0);
         }
 
     public void Current(bool isInput){
         Debug.Log("ff");
+        // transform.position= new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        
+        // transform.Rotate(new Vector3(clamp_x, clamp_y, 0));
         // transform.Rotate(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
     }
 
     public void RotateEuler()
     {
-        currentAngles = new Vector3(clamp_x, clamp_y, 0);
-        transform.localEulerAngles = currentAngles;
-        transform.rotation = Quaternion.Euler(transform.eulerAngles);
+        
+        // transform.rotation = (Quaternion.Euler(currentAngles), Space.World);
+        // transform.Rotate(new Vector3(clamp_x, clamp_y, 0));
+
+        // transform.rotation = Quaternion.Euler(currentAngles.x, currentAngles.y, currentAngles.z);
+
+        // SPos = new Vector3(currentAngles.x, currentAngles.y, currentAngles.z);
+        // SavePos = SPos;
+
+        // transform.position = new Vector3(SavePos.x, SavePos.y, SavePos.z);
+        // Debug.Log("b" + transform.rotation);
+        // Debug.Log("b" + transform.position);
+        
+        // rot.Save(currentAngles);
     }
 
         void Update()
         {
-            RotateEuler();
+            //RotateEuler();
+            Debug.Log("b" + transform.rotation);
+        transform.localEulerAngles = currentAngles;
+            // transform.rotate(transform.eulerAngles);
             // transform.Rotate(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
 
 

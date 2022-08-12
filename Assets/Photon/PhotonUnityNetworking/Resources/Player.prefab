@@ -3164,6 +3164,7 @@ MonoBehaviour:
   NowPos: {x: 0, y: 0}
   isInput: 0
   Player: {fileID: 3502834817832278158}
+  MainCam: {fileID: 3909493920162330053}
 --- !u!1 &6339153104919608657
 GameObject:
   m_ObjectHideFlags: 0
@@ -3263,6 +3264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 3502834817832278158}
   distance: 1
+  rot: {fileID: 1198450557777409032}
   sensitivity: 50
 --- !u!1 &7164018767265330683
 GameObject:

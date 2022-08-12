@@ -15,6 +15,7 @@ public Vector2 DragTouch;
 public Vector2 NowPos;
 public bool isInput;
 public Transform Player;
+public Transform MainCam;
 
 void Start () {
     Debug.Log("start");
@@ -37,6 +38,10 @@ public void OnBeginDrag(PointerEventData eventData)
     public void OnEndDrag(PointerEventData eventData)
     {
         isInput = false;
+        // MainCam.transform.position += new Vector3(10 ,10 ,10);
+        Debug.Log("위치:"+MainCam.transform.localEulerAngles);
+        Debug.Log("끝날때 위치:"+MainCam.transform.position);
+        Debug.Log("끝날때 각:"+MainCam.transform.rotation);
     }
 
     private void TouchRotate(Vector2 pos)
@@ -49,6 +54,14 @@ public void OnBeginDrag(PointerEventData eventData)
         // Debug.Log(NowPos);
         cam.RotateCam(NowPos);
     }
+
+    // public void Save(Vector3 currentAngles){
+        // MainCam.transform.position = new Vector3(SavePos.x, SavePos.y, SavePos.z);
+        // if(isInput==false){
+        // Debug.Log("a" + currentAngles);
+        // MainCam.transform.Rotate(currentAngles.x, currentAngles.y, currentAngles.z);
+    // }
+    // }
 
     void Update()
     {
