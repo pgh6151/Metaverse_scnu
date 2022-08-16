@@ -28,8 +28,8 @@ public class Spawner : MonoBehaviour
         
         while (i < 30)
         {
-            Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
             yield return new WaitForSeconds(1f);
+            Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
             i++;
         }
         
