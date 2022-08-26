@@ -6,10 +6,9 @@ public class Spawner : MonoBehaviour
 {
 
     public GameObject Rock;
-
     Vector3 RanSpawner;
-    int i;
-    // Start is called before the first frame update
+ 
+    
     void Start()
     {   
         StartCoroutine("InstRock");
@@ -17,7 +16,10 @@ public class Spawner : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        Debug.Log(MIniGamemanager.Instance.ST);
+
+        
         RanSpawner = new Vector3(Random.Range(-7, 4), 1.18f, 44.93f);
         
         
@@ -25,13 +27,12 @@ public class Spawner : MonoBehaviour
 
     IEnumerator InstRock()
     {
-        
-        while (i < 30)
+        while(MIniGamemanager.Instance.ST == true)
         {
             yield return new WaitForSeconds(1f);
             Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
-            i++;
         }
+        
         
     }
 }
