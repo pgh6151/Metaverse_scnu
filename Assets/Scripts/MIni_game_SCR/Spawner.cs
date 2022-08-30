@@ -7,7 +7,6 @@ public class Spawner : MonoBehaviour
 
     public GameObject Rock;
     Vector3 RanSpawner;
- 
     
     void Start()
     {   
@@ -19,7 +18,7 @@ public class Spawner : MonoBehaviour
     {   
         Debug.Log(MIniGamemanager.Instance.ST);
 
-        
+
         RanSpawner = new Vector3(Random.Range(-7, 4), 1.18f, 44.93f);
         
         
@@ -27,12 +26,14 @@ public class Spawner : MonoBehaviour
 
     IEnumerator InstRock()
     {
-        while(MIniGamemanager.Instance.ST == true)
+        while(true)
         {
             yield return new WaitForSeconds(1f);
             Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
         }
         
-        
+
     }
+        
+        
 }

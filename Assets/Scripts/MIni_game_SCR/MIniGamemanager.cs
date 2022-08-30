@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class MIniGamemanager : MonoBehaviour
 {
+    // 스톱워치
+    [SerializeField] float timeStart;
+    [SerializeField] Text timeText;
+
+    bool timeActive = false;
+
+
     // 기본적인 변수 전달 싱글톤으로 진행
     private static MIniGamemanager instance = null;
 
 
     public GameObject StartCanv;
     public GameObject ReStartCanv;
+
+    public GameObject player;
 
     public bool ST;
     public bool RST;
@@ -42,7 +52,10 @@ public class MIniGamemanager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        timeText.text = timeStart.ToString("F2");
+
+    
         ST = false;
         RST = false;
     }
@@ -50,6 +63,17 @@ public class MIniGamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timeActive = ST;
+        
+        if(ST == false)
+        {
+            Time.timeScale = 0;
+        }
+        if(ST == true)
+        {
+            Time.timeScale = 1;
+        }
+
         
     }
 
@@ -60,14 +84,24 @@ public class MIniGamemanager : MonoBehaviour
     }
     public void RST_BTN()
     {
-        SceneManager.LoadScene("Minigame1");
-        StartCanv.SetActive(false);
+        ST = true;
+        Instantiate(player,new Vector3(0,0,0), gameObject.transform.rotation);
+        ReStartCanv.SetActive(false);
     }
 
     public void Exit_BTN()
     {
         SceneManager.LoadScene("CinemachineScene");
     }
+
+    public void StartTime()
+    {
+        if(timeActive)
+        {
+            timeStart += Time.deltaTime;
+            timeText.text = timeStart.ToString("F2");
+        }
+    }   
 
 
 }
