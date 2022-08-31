@@ -24,7 +24,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     Vector3 curPos;
     public PhotonView PV;
     public TextMesh NickNameText;
-    
+
     [SerializeField]
     private GameObject Cam; // 자기 자신일때만 카메라 활성화
 
@@ -128,10 +128,9 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         float tempRotation = Mathf.Clamp(rotationX, -90f, 90f);
         moveCamera.localRotation = Quaternion.Euler(tempRotation, 0f, 0f);
         
-        
     }
 
-
+ 
     //변수동기화 필요시 여기에서 제어
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
