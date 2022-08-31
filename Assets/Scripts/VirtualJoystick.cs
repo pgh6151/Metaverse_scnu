@@ -65,6 +65,7 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         var inputVector = inputPosition.magnitude < leverRange ? inputPosition : inputPosition.normalized * leverRange;
         lever.anchoredPosition = inputVector;
         inputDirection = inputVector / leverRange; //inputVector는 해상도 기반이라 값이 매우 커 정규화 함
+        
     }
 
     private void InputControlVector()
