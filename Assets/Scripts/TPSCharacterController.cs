@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -32,7 +33,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     private GameObject Joystick; // 자기 자신일때만 조이스틱 활성화
 
     private void Awake() {
-        NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
+        // NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
         NickNameText.color = PV.IsMine ? Color.green : Color.blue;
 
         if(PV.IsMine)
@@ -122,7 +123,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         // moveCamera 회전 시키기. Euler로 변환
         moveCamera.rotation = Quaternion.Euler(x, camAngle.y + moveDelta.x, camAngle.z);*/
         // transform.rotation = Quaternion.Euler(transform.rotation.x,  transform.rotation.y + inputDirection.x * rotateSpeed, transform.rotation.z);
-        Debug.Log(moveCamera.rotation.eulerAngles.x);
         rotationX -= inputDirection.y;
         transform.Rotate(Vector3.up * inputDirection.x);
         float tempRotation = Mathf.Clamp(rotationX, -90f, 90f);
