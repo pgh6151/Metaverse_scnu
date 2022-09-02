@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
         }
         

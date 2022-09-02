@@ -74,17 +74,20 @@ public class MIniGamemanager : MonoBehaviour
             Time.timeScale = 1;
         }
 
+        StartTime();
         
     }
 
     public void ST_BTN()
     {
+        timeStart = 0f;
         StartCanv.SetActive(false);
         ST = true;
     }
     public void RST_BTN()
     {
         ST = true;
+        timeStart = 0f;
         Instantiate(player,new Vector3(0,0,0), gameObject.transform.rotation);
         ReStartCanv.SetActive(false);
     }
