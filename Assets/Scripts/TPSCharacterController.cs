@@ -21,6 +21,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     Animator animator;
 
+    public int boost = 1;
+
     //건하 수정 포톤뷰에서 부드러운 움직임을 위한 추가
     Vector3 curPos;
     public PhotonView PV;
@@ -97,7 +99,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
              // 대각선 이동이 직선 이동과 같게 만들어주기 위해 nomalized하였다.
              Vector3 moveDir = transform.TransformDirection(playerVelocity).normalized;
              // 동기화를 위한 Time.deltaTime, 조정 값인 moveSpeed
-             _rigidbody.velocity = moveDir * (Time.deltaTime * moveSpeed);
+             _rigidbody.velocity = moveDir * (Time.deltaTime * moveSpeed * boost);
         }
     }
     
@@ -130,7 +132,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         
     }
 
- 
     //변수동기화 필요시 여기에서 제어
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -145,6 +146,5 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         {
             curPos = (Vector3)stream.ReceiveNext();
         }
-
     }
 }

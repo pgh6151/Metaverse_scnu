@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.EventSystems; // 키보드, 마우스, 터치를 이벤트로 오브젝트에 보낼 수 있는 기능을 지원
 
@@ -9,6 +10,7 @@ public class LeftVirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandle
     [SerializeField]
     private RectTransform lever;
     private RectTransform joystick;
+    [SerializeField] private float boostTimer = 0f;
 
     [SerializeField, Range(10, 200)]
     private float leverRange; //레버 범위 제한
@@ -29,6 +31,7 @@ public class LeftVirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandle
     //드래그 시작
     public void OnBeginDrag(PointerEventData eventData) //터치 or 마우스 클릭
     {
+        boostTimer = 0;
         ControlJoystickLever(eventData);
         isInput = true;
     }
@@ -36,7 +39,21 @@ public class LeftVirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandle
     // 오브젝트 클릭 후 드래그 하는 도중 계속 호출. 유지한 상태로 마우스를 멈추면 이벤트가 들어오지 않음
     public void OnDrag(PointerEventData eventData)
     {
+        CharacterBoost();
         ControlJoystickLever(eventData);
+    }
+
+    private void CharacterBoost()
+    {
+        boostTimer += Time.deltaTime;
+        if (boostTimer >= 1f)
+        {
+            controller.boost = 2;
+        }
+        else
+        {
+            controller.boost = 1;
+        }
     }
 
     //드래그 끝
