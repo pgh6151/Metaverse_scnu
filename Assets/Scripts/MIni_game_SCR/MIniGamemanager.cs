@@ -25,6 +25,8 @@ public class MIniGamemanager : MonoBehaviour
 
     public bool ST;
     public bool RST;
+    public int MoveVec;
+    
 
     private void Awake() {
 
@@ -54,7 +56,7 @@ public class MIniGamemanager : MonoBehaviour
     void Start()
     {   
         timeText.text = timeStart.ToString("F2");
-
+        
     
         ST = false;
         RST = false;
@@ -75,6 +77,8 @@ public class MIniGamemanager : MonoBehaviour
         }
 
         StartTime();
+        
+        Debug.Log(MoveVec);
         
     }
 
@@ -105,6 +109,14 @@ public class MIniGamemanager : MonoBehaviour
             timeText.text = timeStart.ToString("F2");
         }
     }   
+    public void leftBtn()
+    {
+        MoveVec = -1;
+    }
+    
+    public void rightBtn()
+    {
+        MoveVec = 1;
 
-
+    }
 }
