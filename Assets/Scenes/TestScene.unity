@@ -3530,6 +3530,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1842681052765906675, guid: c399daa117d45bd48b124af4e7cc2f13, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 1842681052765906677, guid: c399daa117d45bd48b124af4e7cc2f13, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3580,7 +3584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1842681052765906678, guid: c399daa117d45bd48b124af4e7cc2f13, type: 3}
       propertyPath: rotateSpeed
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1842681052782722212, guid: c399daa117d45bd48b124af4e7cc2f13, type: 3}
       propertyPath: m_LocalPosition.x
