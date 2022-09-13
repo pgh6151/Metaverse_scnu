@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    
     [SerializeField] Text StatusText;
     public InputField NickNameInput;
     Scene scene;
@@ -69,6 +70,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.Instantiate("Player", new Vector3 (Random.Range(-5,5),0,0), Quaternion.identity);
     }
+
 
 
 

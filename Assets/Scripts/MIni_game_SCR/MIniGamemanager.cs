@@ -22,11 +22,12 @@ public class MIniGamemanager : MonoBehaviour
     public GameObject ReStartCanv;
 
     public GameObject player;
+    public NetworkManager networkManager;
 
     public bool ST;
     public bool RST;
     public int MoveVec;
-    
+
 
     private void Awake() {
 
@@ -39,6 +40,9 @@ public class MIniGamemanager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        
+
     }
     public static MIniGamemanager Instance
     {
@@ -55,6 +59,8 @@ public class MIniGamemanager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
+        networkManager = FindObjectOfType<NetworkManager>();
+
         timeText.text = timeStart.ToString("F2");
         
     
@@ -78,7 +84,6 @@ public class MIniGamemanager : MonoBehaviour
 
         StartTime();
         
-        Debug.Log(MoveVec);
         
     }
 
@@ -99,6 +104,7 @@ public class MIniGamemanager : MonoBehaviour
     public void Exit_BTN()
     {
         SceneManager.LoadScene("CinemachineScene");
+        Destroy(this.gameObject);
     }
 
     public void StartTime()
@@ -119,4 +125,6 @@ public class MIniGamemanager : MonoBehaviour
         MoveVec = 1;
 
     }
+
+    
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -17,6 +18,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     Vector3 curPos;
     public PhotonView PV;
     public TextMesh NickNameText;
+
     
     [SerializeField]
     private GameObject Cam; // 자기 자신일때만 카메라 활성화
@@ -28,6 +30,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
         NickNameText.color = PV.IsMine ? Color.green : Color.blue;
 
+        DontDestroyOnLoad(gameObject);
+        
         if(PV.IsMine)
         {
             Cam.SetActive(true);
@@ -46,6 +50,17 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
+        Scene scene = SceneManager.GetActiveScene();
+
+        // if(scene.name == "Minigame1")
+        // {
+        //     gameObject.SetActive(false);
+        // }else
+        // {
+        //     gameObject.SetActive(true);
+        // }
+
+        
 
         if(PV.IsMine)
         {

@@ -2749,6 +2749,7 @@ MonoBehaviour:
   StartCanv: {fileID: 2086822245}
   ReStartCanv: {fileID: 584272618}
   player: {fileID: 7666505278053907428, guid: 539ef7e96f8ec7741a808d077241ff24, type: 3}
+  networkManager: {fileID: 4331436672076509873, guid: aca0cd6bb6bf5c248a45a5a40705f485, type: 3}
   ST: 0
   RST: 0
   MoveVec: 0

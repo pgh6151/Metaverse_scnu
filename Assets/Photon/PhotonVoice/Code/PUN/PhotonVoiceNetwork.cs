@@ -245,6 +245,17 @@ namespace Photon.Voice.PUN
                     base.Awake();
                 }
             }
+            // voice network 삭제부분 추가인데 수정이 필요할듯 함
+
+            var objs = FindObjectsOfType<PhotonVoiceNetwork>();
+            if(objs.Length == 1)
+            {
+                DontDestroyOnLoad(gameObject);
+            }else
+            {
+                Destroy(gameObject);
+            }
+
         }
 
         private void OnEnable()
