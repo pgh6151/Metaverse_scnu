@@ -76,8 +76,6 @@ public class RightVirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandl
         Vector2 movePosition = currentPosition - startPosition;
         startPosition = currentPosition;
         inputDirection = movePosition.normalized;
-        Debug.Log("currentPosition : " + currentPosition);
-        Debug.Log("startPosition : " + startPosition);
         // var rectPos = new Vector2(joystickRectX, joystickRectY) ;
         // var inputPosition = eventData.position - rectPos;
         //normalized : 백터 길이 1로 정규화, 이동 속도 일정

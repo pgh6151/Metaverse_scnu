@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -34,6 +35,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     private GameObject Joystick; // 자기 자신일때만 조이스틱 활성화
 
+    [SerializeField] private int radius = 1;
+    
     private void Awake() {
         // NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
         NickNameText.color = PV.IsMine ? Color.green : Color.blue;
@@ -55,18 +58,23 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         animator = characterBody.GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
     }
-
+    
     void Update()
     {
-
         if(PV.IsMine)
         {
             
         }   
         else if ((transform.position - curPos).sqrMagnitude >= 100)transform.position = curPos;  // 위치동기화 시키는 부분
         else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
+    }
 
-
+    private void FixedUpdate() 
+    {
+        if (Physics.CheckSphere(transform.position, radius))
+        {
+            animator.SetBool("Jump", false);
+        }
     }
 
     public void Move(Vector2 inputDirection)
@@ -100,6 +108,9 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
              Vector3 moveDir = transform.TransformDirection(playerVelocity).normalized;
              // 동기화를 위한 Time.deltaTime, 조정 값인 moveSpeed
              _rigidbody.velocity = moveDir * (Time.deltaTime * moveSpeed * boost);
+             
+             float animSpeed = Mathf.Clamp(_rigidbody.velocity.z, -1f, 1f);
+             animator.SetFloat("Speed", animSpeed * boost);
         }
     }
     
@@ -146,5 +157,19 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         {
             curPos = (Vector3)stream.ReceiveNext();
         }
+    }
+
+    public void SayHiButton()
+    {
+        animator.SetTrigger("Wave");
+    }
+
+    public void JumpButton()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        {
+            return;
+        }
+        animator.SetBool("Jump", true);
     }
 }
