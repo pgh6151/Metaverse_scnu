@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f088ebd-aa45-4baa-abd4-afe609e26d20" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CinemachineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CinemachineScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Minigame1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Minigame1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-    </list>
+    <list default="true" id="1f088ebd-aa45-4baa-abd4-afe609e26d20" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +82,7 @@
       <workItem from="1662461956560" duration="1813000" />
       <workItem from="1662539845690" duration="190000" />
       <workItem from="1662540195650" duration="653000" />
-      <workItem from="1663054568978" duration="1759000" />
+      <workItem from="1663054568978" duration="2342000" />
     </task>
     <servers />
   </component>
