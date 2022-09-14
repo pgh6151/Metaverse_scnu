@@ -14,6 +14,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     private Rigidbody _rigidbody;
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float rotateSpeed = 10f;
+
+    [SerializeField] private float animMod = 0.03f;
     
     [SerializeField]
     private Transform characterBody; //캐릭터
@@ -69,12 +71,20 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
     }
 
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
         if (Physics.CheckSphere(transform.position, radius))
         {
             animator.SetBool("Jump", false);
         }
+
+        MoveAnimation();
+    }
+
+    private void MoveAnimation()
+    {
+        float animSpeed = Mathf.Clamp(_rigidbody.velocity.z * animMod, -1f, 1f);
+        animator.SetFloat("Speed", animSpeed * boost);
     }
 
     public void Move(Vector2 inputDirection)
@@ -109,8 +119,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
              // 동기화를 위한 Time.deltaTime, 조정 값인 moveSpeed
              _rigidbody.velocity = moveDir * (Time.deltaTime * moveSpeed * boost);
              
-             float animSpeed = Mathf.Clamp(_rigidbody.velocity.z, -1f, 1f);
-             animator.SetFloat("Speed", animSpeed * boost);
+             
         }
     }
     
