@@ -16,11 +16,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        Debug.Log(MIniGamemanager.Instance.ST);
-
-
         RanSpawner = new Vector3(Random.Range(-7, 4), 1.18f, 44.93f);
-        
         
     }
 
@@ -28,7 +24,7 @@ public class Spawner : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
         }
         

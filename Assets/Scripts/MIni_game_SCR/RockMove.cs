@@ -23,6 +23,7 @@ public class RockMove : MonoBehaviour
     // 플레이어에 닿으면 플레이어를 삭제
     // MiniGamemanager의 ST 변수를 falas로 바꿔줌
     // 플레이어가 죽으면 RestartCanv 활성화
+    
     private void OnTriggerEnter(Collider other) {
 
 
