@@ -52,6 +52,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     {
         Scene scene = SceneManager.GetActiveScene();
 
+        //미니게임에 활용해보려고 했는데 케릭터가 한번꺼지면 돌아오지않음
+        
         // if(scene.name == "Minigame1")
         // {
         //     gameObject.SetActive(false);
