@@ -68,7 +68,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     public void Sqawn()
     {
-        PhotonNetwork.Instantiate("Player", new Vector3 (Random.Range(-5,5),0,0), Quaternion.identity);
+        PhotonNetwork.Instantiate("Character", new Vector3 (Random.Range(-5,5),0,0), Quaternion.identity);
     }
 
 
