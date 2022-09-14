@@ -1565,8 +1565,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 100
-  rotateSpeed: 1
-  animMod: 1
+  rotateSpeed: 0.5
+  animMod: 1.4
   characterBody: {fileID: 590964805100692709}
   moveCamera: {fileID: 590964804533133667}
   boost: 1

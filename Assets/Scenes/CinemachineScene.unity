@@ -3494,11 +3494,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fd976be6282ee40b211030b686c04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputField: {fileID: 0}
-  outputText: {fileID: 0}
-  Chatting: {fileID: 0}
+  inputField: {fileID: 452870528}
+  outputText: {fileID: 1052633448}
+  Chatting: {fileID: 1135295531}
   ChattingONBtn: {fileID: 1033925815}
-  Scrollbar: {fileID: 0}
+  Scrollbar: {fileID: 227440232}
 --- !u!4 &1622693424
 Transform:
   m_ObjectHideFlags: 0
