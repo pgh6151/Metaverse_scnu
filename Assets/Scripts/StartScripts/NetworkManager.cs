@@ -17,7 +17,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Awake() 
     {
         //화면비율 조정필요
-        Screen.SetResolution(1280, 780, false);
+        Screen.SetResolution(3200, 1440, true);
         DontDestroyOnLoad(gameObject);
         scene = SceneManager.GetActiveScene();
     }
@@ -58,6 +58,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("StartScene");
         print("연결끊김");
        
+    }
+
+    public void QuitApp()
+    {
+        Application.Quit();
     }
     public override void OnJoinedRoom()
     {
