@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="" />
+    <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +73,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1f088ebd-aa45-4baa-abd4-afe609e26d20" name="Changes" comment="" />
+      <changelist id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="" />
       <created>1661960265822</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -83,6 +88,7 @@
       <workItem from="1662539845690" duration="190000" />
       <workItem from="1662540195650" duration="653000" />
       <workItem from="1663054568978" duration="2342000" />
+      <workItem from="1663152873173" duration="651000" />
     </task>
     <servers />
   </component>
