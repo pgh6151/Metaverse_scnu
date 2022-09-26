@@ -135,7 +135,6 @@ public class ChatManager : MonoBehaviour, IChatClientListener {
 	#endregion
 
 
-
 	void Update ()
 	{
 		//지속적으로 호출하여 연결을 유지하고 수신 메세지를 받음 (필수 구현)
@@ -151,6 +150,16 @@ public class ChatManager : MonoBehaviour, IChatClientListener {
 
 			inputField.text = "";
 		}
+	}
+
+	public void UpdateChat()
+	{
+		if(inputField.text.Equals("")) return;
+
+		chatClient.PublishMessage(currentChannelName, inputField.text);
+
+		inputField.text = "";
+		
 	}
 
 

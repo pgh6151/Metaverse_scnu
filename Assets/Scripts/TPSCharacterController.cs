@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +8,8 @@ using TMPro;
 
 public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 {
+    private static TPSCharacterController s_Instance = null;
     private float rotationX;
-    
     
     private Rigidbody _rigidbody;
     [SerializeField] private float moveSpeed = 10f;
@@ -17,10 +17,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     [SerializeField] private float animMod = 0.03f;
     
-    [SerializeField]
-    private Transform characterBody; //캐릭터
-    [SerializeField]
-    private Transform moveCamera; //카메라
+    [SerializeField] private Transform characterBody; //캐릭터
+    [SerializeField] private Transform moveCamera; //카메라
 
     Animator animator;
 
@@ -31,16 +29,15 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     public PhotonView PV;
     public TextMesh NickNameText;
 
-    [SerializeField]
-    private GameObject Cam; // 자기 자신일때만 카메라 활성화
+    [SerializeField] private GameObject Cam; // 자기 자신일때만 카메라 활성화
+    [SerializeField] private GameObject MiniCanv;
 
-    [SerializeField]
-    private GameObject Joystick; // 자기 자신일때만 조이스틱 활성화
+    [SerializeField] private GameObject Joystick; // 자기 자신일때만 조이스틱 활성화
 
     [SerializeField] private int radius = 1;
     
     private void Awake() {
-        // NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
+        NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
         NickNameText.color = PV.IsMine ? Color.green : Color.blue;
 
         if(PV.IsMine)
@@ -53,6 +50,14 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             Joystick.SetActive(false);
             
         }
+
+        if(s_Instance)
+        {
+            DestroyImmediate(this.gameObject);
+            return;
+        }
+        s_Instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     void Start()
@@ -63,16 +68,30 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     
     void Update()
     {
+        if(SceneManagerHelper.ActiveSceneName == "Minigame1")
+        {
+            Joystick.SetActive(false);
+            MiniCanv.SetActive(true);
+
+        }else if(SceneManagerHelper.ActiveSceneName == "CinemachineScene")
+        {
+            Joystick.SetActive(true);
+            MiniCanv.SetActive(false);
+
+        }
+    
         if(PV.IsMine)
         {
             
         }   
         else if ((transform.position - curPos).sqrMagnitude >= 100)transform.position = curPos;  // 위치동기화 시키는 부분
         else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
+    
     }
 
     private void FixedUpdate()
     {
+
         if (Physics.CheckSphere(transform.position, radius))
         {
             animator.SetBool("Jump", false);
@@ -181,4 +200,5 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         }
         animator.SetBool("Jump", true);
     }
+
 }

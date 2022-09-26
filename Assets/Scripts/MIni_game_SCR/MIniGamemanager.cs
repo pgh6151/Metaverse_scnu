@@ -22,7 +22,6 @@ public class MIniGamemanager : MonoBehaviour
     public GameObject ReStartCanv;
 
     public GameObject player;
-    public NetworkManager networkManager;
 
     public bool ST;
     public bool RST;
@@ -59,7 +58,6 @@ public class MIniGamemanager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        networkManager = FindObjectOfType<NetworkManager>();
 
         timeText.text = timeStart.ToString("F2");
         
@@ -73,14 +71,6 @@ public class MIniGamemanager : MonoBehaviour
     {
         timeActive = ST;
         
-        if(ST == false)
-        {
-            Time.timeScale = 0;
-        }
-        if(ST == true)
-        {
-            Time.timeScale = 1;
-        }
 
         StartTime();
         
@@ -91,6 +81,7 @@ public class MIniGamemanager : MonoBehaviour
     {
         timeStart = 0f;
         StartCanv.SetActive(false);
+        Debug.Log("작동");
         ST = true;
     }
     public void RST_BTN()
@@ -104,7 +95,7 @@ public class MIniGamemanager : MonoBehaviour
     public void Exit_BTN()
     {
         SceneManager.LoadScene("CinemachineScene");
-        Destroy(this.gameObject);
+        // DestroyImmediate(this.gameObject, true);
     }
 
     public void StartTime()
@@ -114,6 +105,7 @@ public class MIniGamemanager : MonoBehaviour
             timeStart += Time.deltaTime;
             timeText.text = timeStart.ToString("F2");
         }
+        
     }   
     public void leftBtn()
     {
