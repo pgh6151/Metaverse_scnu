@@ -17,10 +17,18 @@ namespace MiniGame3
         {
             if (collision.collider.CompareTag("Player"))
             {
-                Vector3 direction = (transform.position - collision.collider.ClosestPoint(transform.position)).normalized + Vector3.up;
+                Vector3 direction = Camera.main.transform.forward + Vector3.up * 3f;
                 _rigidbody.AddForce(direction * power, ForceMode.Impulse);
             }
-            
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Ground"))
+            {
+                PlayGround playGround = other.GetComponent<PlayGround>();
+                Debug.Log(playGround.GetSide());
+            }
         }
     }
 }
