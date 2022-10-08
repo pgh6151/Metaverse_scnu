@@ -9,7 +9,6 @@ public class Mini_first_player : MonoBehaviour
     public Animator animator;
     float hAxis;
 
-    Vector3 moveVec;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +26,9 @@ public class Mini_first_player : MonoBehaviour
 
         hAxis = Input.GetAxisRaw("Horizontal");
 
-        moveVec  = new Vector3(hAxis,0,0).normalized;
+        MIniGamemanager.Instance.MoveVec  = new Vector3(hAxis,0,0).normalized;
 
-        transform.position += moveVec * 3f * Time.deltaTime;
+        transform.position += MIniGamemanager.Instance.MoveVec * 3f * Time.deltaTime;
     }
     
 

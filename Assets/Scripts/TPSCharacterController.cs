@@ -35,6 +35,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject Joystick; // 자기 자신일때만 조이스틱 활성화
 
     [SerializeField] private int radius = 1;
+
+
     
     private void Awake() {
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
@@ -68,6 +70,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     
     void Update()
     {
+        
         if(SceneManagerHelper.ActiveSceneName == "Minigame1")
         {
             Joystick.SetActive(false);
@@ -86,7 +89,11 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         }   
         else if ((transform.position - curPos).sqrMagnitude >= 100)transform.position = curPos;  // 위치동기화 시키는 부분
         else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
-    
+
+        if(MIniGamemanager.Instance.ST == true)
+        {
+            transform.position += MIniGamemanager.Instance.MoveVec * 3f * Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()

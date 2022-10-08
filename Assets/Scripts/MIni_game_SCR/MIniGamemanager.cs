@@ -25,7 +25,7 @@ public class MIniGamemanager : MonoBehaviour
 
     public bool ST;
     public bool RST;
-    public int MoveVec;
+    public Vector3 MoveVec;
 
 
     private void Awake() {
@@ -109,12 +109,12 @@ public class MIniGamemanager : MonoBehaviour
     }   
     public void leftBtn()
     {
-        MoveVec = -1;
+        MoveVec = new Vector3(-1,0,0);
     }
     
     public void rightBtn()
     {
-        MoveVec = 1;
+        MoveVec = new Vector3(1,0,0);
 
     }
 
