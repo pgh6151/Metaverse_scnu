@@ -8,7 +8,6 @@ using TMPro;
 
 public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 {
-    private static TPSCharacterController s_Instance = null;
     private float rotationX;
     
     private Rigidbody _rigidbody;
@@ -19,6 +18,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     
     [SerializeField] private Transform characterBody; //캐릭터
     [SerializeField] private Transform moveCamera; //카메라
+
+    [SerializeField] private Canvas RotationCanv;
 
     Animator animator;
 
@@ -53,13 +54,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             
         }
 
-        if(s_Instance)
-        {
-            DestroyImmediate(this.gameObject);
-            return;
-        }
-        s_Instance = this;
-        DontDestroyOnLoad(this.gameObject);
     }
 
     void Start()
@@ -71,21 +65,19 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     {
         
-        if(SceneManagerHelper.ActiveSceneName == "Minigame1")
-        {
-            Joystick.SetActive(false);
-            MiniCanv.SetActive(true);
-
-        }else if(SceneManagerHelper.ActiveSceneName == "CinemachineScene")
-        {
-            Joystick.SetActive(true);
-            MiniCanv.SetActive(false);
-
-        }
-    
         if(PV.IsMine)
         {
-            
+            if(SceneManagerHelper.ActiveSceneName == "Minigame1")
+            {
+                Joystick.SetActive(false);
+                MiniCanv.SetActive(true);
+
+            }else if(SceneManagerHelper.ActiveSceneName == "CinemachineScene")
+            {
+                Joystick.SetActive(true);
+                MiniCanv.SetActive(false);
+            }
+
         }   
         else if ((transform.position - curPos).sqrMagnitude >= 100)transform.position = curPos;  // 위치동기화 시키는 부분
         else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);

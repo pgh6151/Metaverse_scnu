@@ -88,7 +88,6 @@ public class MIniGamemanager : MonoBehaviour
     {
         ST = true;
         timeStart = 0f;
-        Instantiate(player,new Vector3(0,0,0), gameObject.transform.rotation);
         ReStartCanv.SetActive(false);
     }
 

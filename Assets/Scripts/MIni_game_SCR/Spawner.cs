@@ -20,10 +20,14 @@ public class Spawner : MonoBehaviour
         RanSpawner = new Vector3(Random.Range(-7, 4), 1.18f, 44.93f);
 
 
-        if(routineControll == 1)
+        if(MIniGamemanager.Instance.ST && routineControll == 1)
         {
             StartCoroutine("InstRock");
             routineControll--;
+        }else if (MIniGamemanager.Instance.ST == false)
+        {
+            StopCoroutine("InstRock");
+            routineControll = 1;
         }
     }
 

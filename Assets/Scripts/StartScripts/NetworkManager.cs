@@ -17,7 +17,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Awake() 
     {
         //화면비율 조정필요
-        Screen.SetResolution(3200, 1440, true);
+        Screen.SetResolution(1440, 3200, false);
+        PhotonNetwork.SendRate = 60;
+        PhotonNetwork.SerializationRate = 30;
+        
         DontDestroyOnLoad(gameObject);
         scene = SceneManager.GetActiveScene();
     }
@@ -73,7 +76,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     public void Sqawn()
     {
-        PhotonNetwork.Instantiate("Character", new Vector3 (Random.Range(-5,5),0,0), Quaternion.identity);
+        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
     }
 
 
