@@ -1,33 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
 
-public class PlayGround : MonoBehaviour
+namespace MiniGame3
 {
-    [SerializeField] Side _side;
-    int _point;
-    int _maxPoint = 15;
-    int _touchCount = 3;
-    bool _cross;
-    void Start()
+    public class PlayGround : MonoBehaviour
     {
+        [SerializeField] Ground ground;
+        int _maxPoint = 15;
+        bool _cross;
+
+    
+
+        void Update()
+        {
         
+        }
+
+        public Ground GetSide()
+        {
+            return ground;
+        }
+
+    
+
     }
 
-    void Update()
+    public enum Ground
     {
-        
+        Red,
+        Blue,
+        OutSide,
     }
 
-    public Side GetSide()
+    public enum Team
     {
-        return _side;
+        Red,
+        Blue
     }
-
-}
-
-public enum Side
-{
-    Red,
-    Blue
 }
