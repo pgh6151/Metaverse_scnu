@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Mapbox.Unity.Utilities;
 using MiniGame3;
 using Unity.VisualScripting;
@@ -7,16 +8,23 @@ using UnityEngine;
 public class VolleyBallManager : MonoBehaviour
 {
     public Team team = Team.Red;
+    public bool isCollided;
     [SerializeField] int redPoints;
     [SerializeField] int bluePoints;
     [SerializeField] Vector3 redBallPos = new Vector3(0, 7f, -13.9f);
     [SerializeField] Vector3 blueBallPos = new Vector3(0, 7f, 8.1f);
-    [SerializeField] float _time = 3f;
+    [SerializeField] int _time = 0;
+    [SerializeField] int _timer = 3;
     [SerializeField] bool _isBlueGetPoint = false;
     [SerializeField] int _touchCount = 3;
+    [SerializeField] float _winTime = 5f;
+    [SerializeField] Transform blueWinTrans;
+    [SerializeField] Transform redWinTrans;
 
     VolleyBall _volleyBall;
     Score _score;
+    List<ParticleSystem> blueParticles = new List<ParticleSystem>();
+    List<ParticleSystem> redParticles = new List<ParticleSystem>();
 
     private static VolleyBallManager _instance;
     public static VolleyBallManager Instance
@@ -47,6 +55,17 @@ public class VolleyBallManager : MonoBehaviour
         
         _volleyBall = FindObjectOfType<VolleyBall>();
         _score = FindObjectOfType<Score>();
+        _time = _timer;
+        blueWinTrans = GameObject.Find("BlueWinParticles").transform;
+        foreach (Transform go in blueWinTrans)
+        {
+            blueParticles.Add(go.GetComponent<ParticleSystem>());
+        }
+        redWinTrans = GameObject.Find("RedWinParticles").transform;
+        foreach (Transform go in redWinTrans)
+        {
+            redParticles.Add(go.GetComponent<ParticleSystem>());
+        }
         ResetRound(_isBlueGetPoint);
     }
 
@@ -56,24 +75,57 @@ public class VolleyBallManager : MonoBehaviour
         {
             bluePoints++;
             _isBlueGetPoint = true;
+            _score.SetScoreText(redPoints, bluePoints);
+
             if (bluePoints == 15)
             {
                 // 블루 승리
-                
+                StartCoroutine(BlueWIn());
+                return;
             }
         }
         else
         {
             redPoints++;
             _isBlueGetPoint = false;
+            _score.SetScoreText(redPoints, bluePoints);
+
             if (redPoints == 15)
             {
                 // 레드 승리
-            
+                StartCoroutine(RedWIn());
+                return;
             }
         }
 
         ResetRound(_isBlueGetPoint);
+    }
+
+    IEnumerator BlueWIn()
+    {
+        foreach (var particleSystem in blueParticles)
+        {
+            particleSystem.Play();
+        }
+        yield return new WaitForSeconds(_winTime);
+        foreach (var particleSystem in blueParticles)
+        {
+            particleSystem.Stop();
+        }
+    }
+    
+    IEnumerator RedWIn()
+    {
+        foreach (var particleSystem in redParticles)
+        {
+            particleSystem.Play();
+        }
+        yield return new WaitForSeconds(_winTime);
+        foreach (var particleSystem in redParticles)
+        {
+            particleSystem.Stop();
+        }
+        
     }
 
     public void IncreaseScore(Ground ground, Team team, bool isPassedSky)
@@ -88,11 +140,28 @@ public class VolleyBallManager : MonoBehaviour
                     {
                         redPoints++;
                         _isBlueGetPoint = false;
+                        _score.SetScoreText(redPoints, bluePoints);
+
+                        if (redPoints == 15)
+                        {
+                            // 레드 승리
+                            Debug.Log("Why");
+                            StartCoroutine(RedWIn());
+                            return;
+                        }
                     }
                     else
                     {
                         bluePoints++;
                         _isBlueGetPoint = true;
+                        _score.SetScoreText(redPoints, bluePoints);
+
+                        if (bluePoints == 15)
+                        {
+                            // 블루 승리
+                            StartCoroutine(BlueWIn());
+                            return;
+                        }
                     }
                     break;
                 case Team.Blue:
@@ -100,11 +169,27 @@ public class VolleyBallManager : MonoBehaviour
                     {
                         redPoints++;
                         _isBlueGetPoint = false;
+                        _score.SetScoreText(redPoints, bluePoints);
+
+                        if (redPoints == 15)
+                        {
+                            // 레드 승리
+                            StartCoroutine(RedWIn());
+                            return;
+                        }
                     }
                     else
                     {
                         bluePoints++;
                         _isBlueGetPoint = true;
+                        _score.SetScoreText(redPoints, bluePoints);
+
+                        if (bluePoints == 15)
+                        {
+                            // 블루 승리
+                            StartCoroutine(BlueWIn());
+                            return;
+                        }
                     }
                     break;
             }
@@ -116,11 +201,27 @@ public class VolleyBallManager : MonoBehaviour
             {
                 bluePoints++;
                 _isBlueGetPoint = true;
+                _score.SetScoreText(redPoints, bluePoints);
+
+                if (bluePoints == 15)
+                {
+                    // 블루 승리
+                    StartCoroutine(BlueWIn());
+                    return;
+                }
             }
             else
             {
                 redPoints++;
                 _isBlueGetPoint = false;
+                _score.SetScoreText(redPoints, bluePoints);
+
+                if (redPoints == 15)
+                {
+                    // 레드 승리
+                    StartCoroutine(RedWIn());
+                    return;
+                }
             }
         }
 
@@ -145,8 +246,15 @@ public class VolleyBallManager : MonoBehaviour
     IEnumerator WaitForRound(Rigidbody ballRigid)
     {
         ballRigid.useGravity = false;
-        yield return new WaitForSeconds(_time);
+        while (_time >= 0)
+        {
+            _score.WaitTimeText(_time);
+            yield return new WaitForSeconds(1f);
+            _time--;
+        }
         ballRigid.useGravity = true;
+        isCollided = false;
+        _time = _timer;
     }
 
     public void IncreaseTouchCount(Team team)
@@ -158,11 +266,13 @@ public class VolleyBallManager : MonoBehaviour
             {
                 redPoints++;
                 _isBlueGetPoint = false;
+                isCollided = true;
             }
             else
             {
                 bluePoints++;
                 _isBlueGetPoint = true;
+                isCollided = true;
             }
             ResetRound(_isBlueGetPoint);
         }

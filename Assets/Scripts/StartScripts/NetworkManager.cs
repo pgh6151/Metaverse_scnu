@@ -71,7 +71,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("Character", new Vector3 (Random.Range(-5,5),0,0), Quaternion.identity);
     }
 
-
-
-
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+    }
 }
