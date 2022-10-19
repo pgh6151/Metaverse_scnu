@@ -14,7 +14,7 @@ public class RockMove : MonoBehaviour
     // 소환즉시 그냥 바로 날아올 수 있게
     void Update()
     {
-        transform.Translate(Vector3.back * 0.05f);
+        transform.Translate(Vector3.back * 0.1f);
 
 
     }

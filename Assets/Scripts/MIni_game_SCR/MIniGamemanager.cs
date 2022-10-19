@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using Photon.Pun;
+using Photon.Realtime;
 
 public class MIniGamemanager : MonoBehaviour
 {
@@ -79,6 +80,8 @@ public class MIniGamemanager : MonoBehaviour
 
     public void ST_BTN()
     {
+        player.transform.position = new Vector3(0,0,0);
+
         timeStart = 0f;
         StartCanv.SetActive(false);
         Debug.Log("작동");
@@ -93,8 +96,7 @@ public class MIniGamemanager : MonoBehaviour
 
     public void Exit_BTN()
     {
-        SceneManager.LoadScene("CinemachineScene");
-        // DestroyImmediate(this.gameObject, true);
+        PhotonNetwork.LoadLevel("CinemachineScene");
     }
 
     public void StartTime()
@@ -108,11 +110,13 @@ public class MIniGamemanager : MonoBehaviour
     }   
     public void leftBtn()
     {
+        Debug.Log("왼쪽");
         MoveVec = new Vector3(-1,0,0);
     }
     
     public void rightBtn()
     {
+        Debug.Log("오른쪽");
         MoveVec = new Vector3(1,0,0);
 
     }

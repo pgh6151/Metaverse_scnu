@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
+
 
 public class miniGameCotroller : MonoBehaviour
 {
     
-    public void SwapScene()
-    {
-        SceneManager.LoadScene("Minigame1");
-    }
 }

@@ -317,7 +317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &590964803560820329
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1476,6 +1476,8 @@ MonoBehaviour:
   animMod: 1
   characterBody: {fileID: 590964805100692709}
   moveCamera: {fileID: 590964804533133667}
+  RotationCanv: {fileID: 590964804865315665}
+  EmotionCanv: {fileID: 590964805066920325}
   boost: 1
   PV: {fileID: 590964804549884725}
   NickNameText: {fileID: 5617056172602933874}
@@ -2098,7 +2100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &590964804865315666
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2460,7 +2462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &590964805066920326
 RectTransform:
   m_ObjectHideFlags: 0

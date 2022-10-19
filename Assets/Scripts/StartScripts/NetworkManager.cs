@@ -11,6 +11,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     [SerializeField] Text StatusText;
     public InputField NickNameInput;
+    
     Scene scene;
     
     #region
@@ -42,12 +43,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // OnConnectedToMaster
     // PhotonNetwork.autoJoinLobby 이 false인 경우에만 마스터 서버에 연결되고 인증 후에 호출
 
-    public override void OnConnectedToMaster() 
+    public override void OnConnectedToMaster()
     {
         print("서버접속");
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         
-        //가볍게 씬넘기기
+        //씬넘기기
         SceneManager.LoadScene("CinemachineScene");
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 10}, null);
     }
@@ -72,14 +73,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Sqawn();
     }
 
+    
+    
+    // public override void OnLeftRoom()
+    // {
+    //     PhotonNetwork.LoadLevel(PhotonNetwork.CurrentRoom.Name);
+    // }
+    
+
     #endregion
     
+    // 씬이동시 무조건 이거사용
+    public void moveScene_gunha()
+    {
+        PhotonNetwork.LoadLevel("Minigame1");
+                
+    }
+
     public void Sqawn()
     {
         PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
     }
-
-
-
-
+    
 }

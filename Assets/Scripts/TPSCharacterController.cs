@@ -5,6 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.UI;
 
 public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -19,7 +20,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private Transform characterBody; //캐릭터
     [SerializeField] private Transform moveCamera; //카메라
 
-    [SerializeField] private Canvas RotationCanv;
+    [SerializeField] private GameObject RotationCanv; // 회전 canvas
+    [SerializeField] private GameObject EmotionCanv; // 감정표현 canvas
 
     Animator animator;
 
@@ -27,6 +29,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     //건하 수정 포톤뷰에서 부드러운 움직임을 위한 추가
     Vector3 curPos;
+    Quaternion curRot = Quaternion.identity;
     public PhotonView PV;
     public TextMesh NickNameText;
 
@@ -40,6 +43,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     
     private void Awake() {
+
+        DontDestroyOnLoad(gameObject);
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
         NickNameText.color = PV.IsMine ? Color.green : Color.blue;
 
@@ -58,40 +63,56 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
+
         animator = characterBody.GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
+    
     }
     
     void Update()
     {
-        
+        //ismine 일때만 구동해서 네트워크 제어
         if(PV.IsMine)
         {
             if(SceneManagerHelper.ActiveSceneName == "Minigame1")
             {
+                //미니게임일때 제어
+                this.gameObject.transform.localEulerAngles = new Vector3(0,0,0);
+
+                //미니게임일때의 켄버스 제어
                 Joystick.SetActive(false);
+                RotationCanv.SetActive(false);
+                EmotionCanv.SetActive(false);
                 MiniCanv.SetActive(true);
 
             }else if(SceneManagerHelper.ActiveSceneName == "CinemachineScene")
             {
                 Joystick.SetActive(true);
+                RotationCanv.SetActive(true);
+                EmotionCanv.SetActive(true);
                 MiniCanv.SetActive(false);
             }
 
-        }   
-        else if ((transform.position - curPos).sqrMagnitude >= 100)transform.position = curPos;  // 위치동기화 시키는 부분
-        else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
+        }
+        else if ((transform.position - curPos).sqrMagnitude >= 100)transform.position = curPos; //너무 멀어졌을 때 부드러운 위치 동기화
+        else 
+        {
+            transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
+            transform.rotation = Quaternion.Slerp(transform.rotation, curRot, Time.deltaTime * 10);
+        }
 
         if(MIniGamemanager.Instance.ST == true)
-        {
-            transform.position += MIniGamemanager.Instance.MoveVec * 3f * Time.deltaTime;
+        {   
+            transform.position += MIniGamemanager.Instance.MoveVec * 3f * Time.deltaTime; 
         }
+        
     }
+    
 
     private void FixedUpdate()
     {
 
-        if (Physics.CheckSphere(transform.position, radius))
+        if (PV.IsMine && Physics.CheckSphere(transform.position, radius))
         {
             animator.SetBool("Jump", false);
         }
@@ -177,27 +198,32 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         //PV transform 보다 부드럽게 위치동기화
         if(stream.IsWriting)
         {
-            //현재 포지션을 넘겨줌
+            //현재 포지션, 로테이션을 넘겨줌
             stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
         }
         else
         {
             curPos = (Vector3)stream.ReceiveNext();
+            curRot = (Quaternion)stream.ReceiveNext();
+
         }
     }
 
     public void SayHiButton()
     {
-        animator.SetTrigger("Wave");
+        if(PV.IsMine) this.animator.SetTrigger("Wave");
     }
 
     public void JumpButton()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        if(PV.IsMine)
         {
-            return;
+            if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            {  return; }
+            this.animator.SetBool("Jump", true);
         }
-        animator.SetBool("Jump", true);
+       
     }
 
 }

@@ -145,6 +145,7 @@ namespace Photon.Pun
         /// </remarks>
         public virtual void OnLeftRoom()
         {
+            
         }
 
         /// <summary>
