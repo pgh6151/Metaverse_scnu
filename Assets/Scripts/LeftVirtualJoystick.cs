@@ -45,7 +45,8 @@ public class LeftVirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandle
 
     private void CharacterBoost()
     {
-        boostTimer += Time.deltaTime;
+        // TODO 나중에 버튼으로 추가할 생각이 있음
+        /*boostTimer += Time.deltaTime;
         if (boostTimer >= 1f)
         {
             controller.boost = 2;
@@ -53,7 +54,7 @@ public class LeftVirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandle
         else
         {
             controller.boost = 1;
-        }
+        }*/
     }
 
     //드래그 끝
