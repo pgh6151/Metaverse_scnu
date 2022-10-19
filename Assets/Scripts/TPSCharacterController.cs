@@ -12,9 +12,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     private float rotationX;
     
     private Rigidbody _rigidbody;
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 10f; // 이동속도 상향 필요
     [SerializeField] private float rotateSpeed = 10f;
-
     [SerializeField] private float animMod = 0.03f;
     
     [SerializeField] private Transform characterBody; //캐릭터
