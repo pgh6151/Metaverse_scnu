@@ -3164,6 +3164,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6124890666560535593, guid: dff5025b703ed0046ba9df0b75780f83, type: 3}
+      propertyPath: Rock
+      value: 
+      objectReference: {fileID: 6708417845697160047, guid: 24ff4ac716a38ee4895d396ded7ea897, type: 3}
+    - target: {fileID: 6124890666560535593, guid: dff5025b703ed0046ba9df0b75780f83, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 590964804549884714}

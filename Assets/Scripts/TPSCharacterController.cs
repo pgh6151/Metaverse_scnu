@@ -43,7 +43,19 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     
     private void Awake() {
 
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad 부분
+        
+        var objs = FindObjectsOfType<TPSCharacterController>();
+        if(objs.Length == 1 && PV.IsMine)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (objs.Length != PhotonNetwork.CountOfPlayers)
+        {
+            Destroy(gameObject);
+        }
+        
+        
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
         NickNameText.color = PV.IsMine ? Color.green : Color.blue;
 
@@ -57,6 +69,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             Joystick.SetActive(false);
             
         }
+
+
 
     }
 
@@ -224,5 +238,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         }
        
     }
+
+    [PunRPC]
+    public void DestroyRPC() => Destroy(gameObject);
 
 }

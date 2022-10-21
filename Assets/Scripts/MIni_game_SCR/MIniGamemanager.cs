@@ -18,11 +18,17 @@ public class MIniGamemanager : MonoBehaviour
 
     bool timeActive = false;
 
-
+    
     public GameObject StartCanv;
     public GameObject ReStartCanv;
 
     public GameObject player;
+
+    //미니게임 프리펩, 변수 (spawner)
+    public GameObject Rock;
+    Vector3 RanSpawner;
+    int routineControll = 1;
+
 
     public bool ST;
     public bool RST;
@@ -70,11 +76,21 @@ public class MIniGamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //미니게임 시간제어
         timeActive = ST;
-        
-
         StartTime();
         
+        RanSpawner = new Vector3(Random.Range(-7, 4), 1.18f, 44.93f);
+
+        if(MIniGamemanager.Instance.ST && routineControll == 1)
+        {
+            StartCoroutine("InstRock");
+            routineControll--;
+        }else if (MIniGamemanager.Instance.ST == false)
+        {
+            StopCoroutine("InstRock");
+            routineControll = 1;
+        }
         
     }
 
@@ -119,6 +135,17 @@ public class MIniGamemanager : MonoBehaviour
         Debug.Log("오른쪽");
         MoveVec = new Vector3(1,0,0);
 
+    }
+
+    IEnumerator InstRock()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1f);
+            Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
+            
+        }
+        
     }
 
     

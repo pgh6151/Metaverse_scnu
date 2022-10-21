@@ -10,19 +10,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     
     [SerializeField] Text StatusText;
-    public InputField NickNameInput;
-    
+    [SerializeField] InputField NickNameInput;
+
+    PhotonView PV;
     Scene scene;
     
     #region
     private void Awake() 
     {
+        
+        DontDestroyOnLoad(gameObject);
+        
+
         //화면비율 조정필요
         Screen.SetResolution(1440, 3200, false);
         PhotonNetwork.SendRate = 60;
         PhotonNetwork.SerializationRate = 30;
+        PhotonNetwork.AutomaticallySyncScene = true;
         
-        DontDestroyOnLoad(gameObject);
         scene = SceneManager.GetActiveScene();
     }
 
@@ -49,7 +54,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         
         //씬넘기기
-        SceneManager.LoadScene("CinemachineScene");
+        PhotonNetwork.LoadLevel("CinemachineScene");
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 10}, null);
     }
 
@@ -59,7 +64,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause) 
     {
         
-        SceneManager.LoadScene("StartScene");
+        PhotonNetwork.LoadLevel("StartScene");
         print("연결끊김");
        
     }
@@ -86,13 +91,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // 씬이동시 무조건 이거사용
     public void moveScene_gunha()
     {
+        
         PhotonNetwork.LoadLevel("Minigame1");
-                
-    }
+        
+    } 
 
     public void Sqawn()
     {
         PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
     }
+
+
+    
     
 }
