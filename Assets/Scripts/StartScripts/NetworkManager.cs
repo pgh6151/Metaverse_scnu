@@ -11,6 +11,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     [SerializeField] Text StatusText;
     public InputField NickNameInput;
+    [SerializeField] GameObject playerPrefab;
     
     Scene scene;
     
@@ -24,6 +25,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         DontDestroyOnLoad(gameObject);
         scene = SceneManager.GetActiveScene();
+
+        PhotonNetwork.IsMessageQueueRunning = true;
     }
 
     private void Update() 
@@ -51,6 +54,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //씬넘기기
         SceneManager.LoadScene("CinemachineScene");
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 10}, null);
+        
     }
 
     public void DisConnect() => PhotonNetwork.Disconnect();
@@ -70,9 +74,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        Sqawn();
+        PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
     }
-
     
     
     // public override void OnLeftRoom()
@@ -87,12 +90,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void moveScene_gunha()
     {
         PhotonNetwork.LoadLevel("Minigame1");
-                
     }
 
-    public void Sqawn()
+    public void MoveToBeach()
     {
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.LoadLevel("DemoScene");
     }
-    
+
 }

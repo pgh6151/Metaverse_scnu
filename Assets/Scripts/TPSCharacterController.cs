@@ -43,7 +43,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     
     private void Awake() {
 
-        DontDestroyOnLoad(gameObject);
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
         NickNameText.color = PV.IsMine ? Color.green : Color.blue;
 
@@ -89,7 +88,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
                 Joystick.SetActive(true);
                 RotationCanv.SetActive(true);
                 EmotionCanv.SetActive(true);
-                MiniCanv.SetActive(false);
+                //MiniCanv.SetActive(false);
             }
 
         }
@@ -100,10 +99,10 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             transform.rotation = Quaternion.Slerp(transform.rotation, curRot, Time.deltaTime * 10);
         }
 
-        if(MIniGamemanager.Instance.ST == true)
-        {   
-            transform.position += MIniGamemanager.Instance.MoveVec * 3f * Time.deltaTime; 
-        }
+        // if(MIniGamemanager.Instance.ST == true)
+        // {   
+        //     transform.position += MIniGamemanager.Instance.MoveVec * 3f * Time.deltaTime; 
+        // }
         
     }
     
