@@ -10,15 +10,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     
     [SerializeField] Text StatusText;
-    public InputField NickNameInput;
+    [SerializeField] InputField NickNameInput;
+
+    PhotonView PV;
     Scene scene;
     
     #region
     private void Awake() 
     {
-        //화면비율 조정필요
-        Screen.SetResolution(3200, 1440, true);
+        
         DontDestroyOnLoad(gameObject);
+        
+
+        //화면비율 조정필요
+        Screen.SetResolution(1440, 3200, false);
+        PhotonNetwork.SendRate = 60;
+        PhotonNetwork.SerializationRate = 30;
+        PhotonNetwork.AutomaticallySyncScene = true;
+        
         scene = SceneManager.GetActiveScene();
     }
 
@@ -39,13 +48,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // OnConnectedToMaster
     // PhotonNetwork.autoJoinLobby 이 false인 경우에만 마스터 서버에 연결되고 인증 후에 호출
 
-    public override void OnConnectedToMaster() 
+    public override void OnConnectedToMaster()
     {
         print("서버접속");
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         
-        //가볍게 씬넘기기
-        SceneManager.LoadScene("CinemachineScene");
+        //씬넘기기
+        PhotonNetwork.LoadLevel("CinemachineScene");
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 10}, null);
     }
 
@@ -55,7 +64,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause) 
     {
         
-        SceneManager.LoadScene("StartScene");
+        PhotonNetwork.LoadLevel("StartScene");
         print("연결끊김");
        
     }
@@ -69,14 +78,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Sqawn();
     }
 
+    
+    
+    // public override void OnLeftRoom()
+    // {
+    //     PhotonNetwork.LoadLevel(PhotonNetwork.CurrentRoom.Name);
+    // }
+    
+
     #endregion
     
+    // 씬이동시 무조건 이거사용
+    public void moveScene_gunha()
+    {
+        
+        PhotonNetwork.LoadLevel("Minigame1");
+        
+    } 
+
     public void Sqawn()
     {
-        PhotonNetwork.Instantiate("Character", new Vector3 (Random.Range(-5,5),0,0), Quaternion.identity);
+        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
     }
 
 
-
-
+    
+    
 }
