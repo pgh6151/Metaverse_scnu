@@ -61,7 +61,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
-
+        photonView.RPC("UpdatePlayer", RpcTarget.All);
         animator = characterBody.GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         PhotonNetwork.IsMessageQueueRunning = true;
@@ -230,6 +230,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (!photonView.IsMine)
             Destroy(gameObject);
+        
     }
     
     

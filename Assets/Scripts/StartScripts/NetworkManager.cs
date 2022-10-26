@@ -86,13 +86,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void moveScene_gunha()
     {
         PhotonNetwork.LoadLevel("Minigame1");
+        PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
     }
 
     public void MoveToBeach()
     {
-        PhotonNetwork.IsMessageQueueRunning = false;
         PhotonNetwork.LoadLevel(3);
-        photonView.RPC("UpdatePlayer", RpcTarget.All);
+        PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
     }
 
     
