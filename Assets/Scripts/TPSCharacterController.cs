@@ -224,5 +224,14 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         }
        
     }
+    
+    [PunRPC]
+    public void UpdatePlayer()
+    {
+        if (!photonView.IsMine)
+            Destroy(gameObject);
+    }
+    
+    
 
 }

@@ -95,11 +95,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         photonView.RPC("UpdatePlayer", RpcTarget.All);
     }
 
-    [PunRPC]
-    public void UpdatePlayer()
-    {
-        if (!photonView.IsMine)
-            Destroy(gameObject);
-    }
+    
 
 }
