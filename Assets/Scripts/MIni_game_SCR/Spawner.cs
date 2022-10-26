@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
 
     public GameObject Rock;
     Vector3 RanSpawner;
-    int routineControll =1;
+    int routineControll =0;
     
     void Start()
     {   
@@ -19,6 +19,10 @@ public class Spawner : MonoBehaviour
     {   
         RanSpawner = new Vector3(Random.Range(-7, 4), 1.18f, 44.93f);
 
+        if(MIniGamemanager.Instance.ST == true)
+        {
+            routineControll = 1;
+        }
 
         if(routineControll == 1)
         {

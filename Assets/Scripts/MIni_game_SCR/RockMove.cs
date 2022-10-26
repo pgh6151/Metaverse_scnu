@@ -33,7 +33,6 @@ public class RockMove : MonoBehaviour
         }
         if(other.gameObject.tag == "Player")
         {
-            Destroy(other.gameObject);
             MIniGamemanager.Instance.ReStartCanv.SetActive(true);
             MIniGamemanager.Instance.ST = false;
         }

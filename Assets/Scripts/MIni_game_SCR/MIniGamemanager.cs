@@ -29,8 +29,9 @@ public class MIniGamemanager : MonoBehaviour
 
 
     private void Awake() {
-
-         if (null == instance)
+        
+        
+        if (null == instance)
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);

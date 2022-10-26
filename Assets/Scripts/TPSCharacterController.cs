@@ -70,12 +70,10 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(SceneManagerHelper.ActiveSceneName == "Minigame1")
         {
-            Joystick.SetActive(false);
             MiniCanv.SetActive(true);
 
         }else if(SceneManagerHelper.ActiveSceneName == "CinemachineScene")
         {
-            Joystick.SetActive(true);
             MiniCanv.SetActive(false);
 
         }
