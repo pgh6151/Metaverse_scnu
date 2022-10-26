@@ -25,8 +25,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         DontDestroyOnLoad(gameObject);
         scene = SceneManager.GetActiveScene();
-
-        PhotonNetwork.IsMessageQueueRunning = true;
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     private void Update() 
@@ -94,7 +93,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void MoveToBeach()
     {
-        PhotonNetwork.LoadLevel("DemoScene");
+        SceneManager.LoadScene("DemoScene");
     }
 
 }
