@@ -25,7 +25,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         DontDestroyOnLoad(gameObject);
         scene = SceneManager.GetActiveScene();
-        PhotonNetwork.IsMessageQueueRunning = true;
     }
 
     private void Update() 
@@ -51,7 +50,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         
         //씬넘기기
-        SceneManager.LoadScene("CinemachineScene");
+        PhotonNetwork.LoadLevel(1);
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 10}, null);
         
     }
@@ -61,10 +60,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // 나가기 버튼 누르면 어플리케이션이 나가지도록
     public override void OnDisconnected(DisconnectCause cause) 
     {
-        
-        SceneManager.LoadScene("StartScene");
+        PhotonNetwork.LoadLevel(0);
         print("연결끊김");
-       
     }
 
     public void QuitApp()

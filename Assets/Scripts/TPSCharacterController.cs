@@ -64,6 +64,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
         animator = characterBody.GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
+        PhotonNetwork.IsMessageQueueRunning = true;
     
     }
     
