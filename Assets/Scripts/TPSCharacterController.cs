@@ -66,8 +66,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         _rigidbody = GetComponent<Rigidbody>();
         PhotonNetwork.IsMessageQueueRunning = true;
         Debug.Log(SceneManager.GetActiveScene().name);
-        
-    
     }
     
     void Update()

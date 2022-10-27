@@ -104,7 +104,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     IEnumerator LoadLevelAsync(string sceneName)
     {
         if (_player)
+        {
             PhotonNetwork.Destroy(_player);
+            Debug.Log("Destroy");
+        }
         
         PhotonNetwork.IsMessageQueueRunning = false;
         PhotonNetwork.LoadLevel(sceneName);
@@ -115,9 +118,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             yield return null;
         }     
         PhotonNetwork.IsMessageQueueRunning = true;
-        
+
         if (PhotonNetwork.InRoom && !_player && SceneManager.GetActiveScene().name == sceneName)
+        {
             _player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+            Debug.Log("Instantiate");
+        }
         else
         {
             Debug.Log($"PhotonNetwork.InRoom : {PhotonNetwork.InRoom} !_player : {!_player} SceneManager.GetActiveScene().name == sceneName {SceneManager.GetActiveScene().name == sceneName} {SceneManager.GetActiveScene().name}");
