@@ -6,9 +6,11 @@ using Photon.Realtime;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class NetworkManager : MonoBehaviourPunCallbacks
+public class NetworkManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
 {
     static NetworkManager _instance;
+    static List<PhotonView> photonViewsToDestroy = new List<PhotonView>();
+
     public static NetworkManager Instance
     {
         get
@@ -64,7 +66,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         print("서버접속");
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         
-        CoroutineHandler.Instance.StartCoroutine(LoadLevelAsync("CinemachineScene"));
         //씬넘기기
         PhotonNetwork.JoinOrCreateRoom("CinemachineRoom", new RoomOptions {MaxPlayers = 10}, null);
         Debug.Log("OnConnectedToMaster");
@@ -86,8 +87,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("JoinRoom");
-        OnLevelLoaded();
-
+        CoroutineHandler.Instance.StartCoroutine(LoadLevelAsync("CinemachineScene"));
     }
     
     
@@ -109,6 +109,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("MoveToBeach");
         CoroutineHandler.Instance.StartCoroutine(LoadLevelAsync("DemoScene"));
+        
     }
     
     
@@ -124,7 +125,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             yield return null;
         }     
         PhotonNetwork.IsMessageQueueRunning = true;
-
+        if (_player)
+            DestroySceneObject(_player.GetPhotonView());
         if (PhotonNetwork.InRoom && !_player && SceneManager.GetActiveScene().name == sceneName)
         {
             _player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
@@ -137,9 +139,55 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    void OnLevelLoaded()
+    
+    
+    public static void DestroySceneObject(PhotonView photonView)
     {
-        if (!_player)
-            _player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        if (PhotonNetwork.IsConnected)
+        {
+            if (photonView.isRuntimeInstantiated) // instantiated at runtime
+            {
+                if (photonView.IsMine)
+                {
+                    PhotonNetwork.Destroy(photonView);
+                }
+                else
+                {
+                    photonView.RequestOwnership();
+                    photonViewsToDestroy.Add(photonView);
+                }
+            }
+            else // scene view loaded in the scene
+            {
+                photonView.RPC("LocalSelfDestroy", RpcTarget.AllBuffered);
+                //otherPhotonView.RPC("LocalDestroy", RpcTarget.AllBuffered, photonView.ViewID); // another option
+            }
+        }
+        else
+        {
+            Destroy(photonView); // photonView.LocalSelfDestroy();
+        }
+    }
+
+    [PunRPC]
+    void LocalSelfDestroy()
+    {
+        Destroy(photonView);
+    }
+
+
+    public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
+    {
+        
+    }
+
+    public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
+    {
+        
+    }
+
+    public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
+    {
+        
     }
 }

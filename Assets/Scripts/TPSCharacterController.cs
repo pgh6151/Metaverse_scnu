@@ -40,7 +40,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     [SerializeField] private int radius = 1;
 
-
     
     private void Awake() {
 
@@ -67,11 +66,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         PhotonNetwork.IsMessageQueueRunning = true;
         Debug.Log(SceneManager.GetActiveScene().name);
         
-        if (!photonView.IsMine)
-        { 
-            PhotonNetwork.Destroy(gameObject);
-            Debug.Log("Destroy");
-        }
     }
     
     void Update()
@@ -230,9 +224,4 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         }
        
     }
-    
-    
-    
-    
-
 }
