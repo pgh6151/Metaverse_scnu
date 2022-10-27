@@ -105,8 +105,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (_player)
         {
-            PhotonNetwork.Destroy(_player);
-            Debug.Log("Destroy");
+            if (!photonView.IsMine)
+            { 
+                PhotonNetwork.Destroy(gameObject);
+                Debug.Log("Destroy");
+                yield break;
+            }
         }
         
         PhotonNetwork.IsMessageQueueRunning = false;
