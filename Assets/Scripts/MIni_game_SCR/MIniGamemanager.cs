@@ -9,9 +9,6 @@ using Photon.Realtime;
 public class MIniGamemanager : MonoBehaviour
 {
 
-    // 기본적인 변수 전달 싱글톤으로 진행
-    private static MIniGamemanager instance = null;
-
     // 스톱워치
     [SerializeField] float timeStart;
     [SerializeField] Text timeText;
@@ -22,52 +19,27 @@ public class MIniGamemanager : MonoBehaviour
     public GameObject StartCanv;
     public GameObject ReStartCanv;
 
-    public GameObject player;
-
     //미니게임 프리펩, 변수 (spawner)
     public GameObject Rock;
     Vector3 RanSpawner;
     int routineControll = 1;
 
-
+    //공용변수 
     public bool ST;
     public bool RST;
-    public Vector3 MoveVec;
+    public Vector3 MoveVec = new Vector3 (0,0,0);
 
 
-    private void Awake() {
-
-         if (null == instance)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
+    private void Awake() 
+    {
         
 
-    }
-    public static MIniGamemanager Instance
-    {
-        get
-        {
-            if (null == instance)
-            {
-                return null;
-            }
-            return instance;
-        }
     }
 
     // Start is called before the first frame update
     void Start()
     {   
-
         timeText.text = timeStart.ToString("F2");
-        
     
         ST = false;
         RST = false;
@@ -82,11 +54,11 @@ public class MIniGamemanager : MonoBehaviour
         
         RanSpawner = new Vector3(Random.Range(-7, 4), 1.18f, 44.93f);
 
-        if(MIniGamemanager.Instance.ST && routineControll == 1)
+        if(ST && routineControll == 1)
         {
             StartCoroutine("InstRock");
             routineControll--;
-        }else if (MIniGamemanager.Instance.ST == false)
+        }else if (ST == false)
         {
             StopCoroutine("InstRock");
             routineControll = 1;
@@ -96,7 +68,6 @@ public class MIniGamemanager : MonoBehaviour
 
     public void ST_BTN()
     {
-        player.transform.position = new Vector3(0,0,0);
 
         timeStart = 0f;
         StartCanv.SetActive(false);
@@ -112,7 +83,7 @@ public class MIniGamemanager : MonoBehaviour
 
     public void Exit_BTN()
     {
-        PhotonNetwork.LoadLevel("CinemachineScene");
+        SceneManager.LoadScene("CinemachineScene");
     }
 
     public void StartTime()

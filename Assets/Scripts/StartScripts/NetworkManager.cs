@@ -21,9 +21,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         DontDestroyOnLoad(gameObject);
         
-
         //화면비율 조정필요
-        Screen.SetResolution(1440, 3200, false);
+        Screen.SetResolution(3200, 1440, true);
         PhotonNetwork.SendRate = 60;
         PhotonNetwork.SerializationRate = 30;
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -54,7 +53,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         
         //씬넘기기
-        PhotonNetwork.LoadLevel("CinemachineScene");
+        SceneManager.LoadScene("CinemachineScene");
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 10}, null);
     }
 
@@ -92,9 +91,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void moveScene_gunha()
     {
         
-        PhotonNetwork.LoadLevel("Minigame1");
+        SceneManager.LoadScene("Minigame1");
         
-    } 
+    }
+    public void ARcam_ON()
+    {
+        SceneManager.LoadScene("ARScene");
+    }
 
     public void Sqawn()
     {

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RockMove : MonoBehaviour
 {
-
+    
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // 소환즉시 그냥 바로 날아올 수 있게
@@ -33,8 +33,9 @@ public class RockMove : MonoBehaviour
         }
         if(other.gameObject.tag == "Player")
         {
-            MIniGamemanager.Instance.ReStartCanv.SetActive(true);
-            MIniGamemanager.Instance.ST = false;
+            var mIniGamemanager = GameObject.Find("MiniGamemanager").GetComponent<MIniGamemanager>();
+            mIniGamemanager.ReStartCanv.SetActive(true);
+            mIniGamemanager.ST = false;
         }
     }
 
