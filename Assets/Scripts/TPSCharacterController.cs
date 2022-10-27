@@ -66,6 +66,12 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         _rigidbody = GetComponent<Rigidbody>();
         PhotonNetwork.IsMessageQueueRunning = true;
         Debug.Log(SceneManager.GetActiveScene().name);
+        
+        if (!photonView.IsMine)
+        { 
+            PhotonNetwork.Destroy(gameObject);
+            Debug.Log("Destroy");
+        }
     }
     
     void Update()

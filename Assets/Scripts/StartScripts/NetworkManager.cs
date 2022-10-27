@@ -103,16 +103,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     IEnumerator LoadLevelAsync(string sceneName)
     {
-        if (_player)
-        {
-            if (!photonView.IsMine)
-            { 
-                PhotonNetwork.Destroy(gameObject);
-                Debug.Log("Destroy");
-                yield break;
-            }
-        }
-        
         PhotonNetwork.IsMessageQueueRunning = false;
         PhotonNetwork.LoadLevel(sceneName);
        

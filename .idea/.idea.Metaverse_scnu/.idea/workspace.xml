@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="" />
+    <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StartScripts/NetworkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StartScripts/NetworkManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TPSCharacterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TPSCharacterController.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -107,7 +110,7 @@
       <workItem from="1666341803139" duration="3324000" />
       <workItem from="1666775118146" duration="6636000" />
       <workItem from="1666787438259" duration="3972000" />
-      <workItem from="1666832154208" duration="5523000" />
+      <workItem from="1666832154208" duration="5885000" />
     </task>
     <servers />
   </component>
