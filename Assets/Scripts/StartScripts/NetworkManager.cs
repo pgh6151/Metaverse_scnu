@@ -37,9 +37,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Screen.SetResolution(1440, 3200, false);
         PhotonNetwork.SendRate = 60;
         PhotonNetwork.SerializationRate = 30;
-        
         DontDestroyOnLoad(gameObject);
-        
         scene = SceneManager.GetActiveScene();
         _instance = this;
     }
