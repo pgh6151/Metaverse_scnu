@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Resources/Scenes/StartScene.unity
+    path: Assets/Scenes/StartScene.unity
     guid: 2bb73579357b0254aa8aeec354837817
   - enabled: 1
-    path: Assets/Resources/Scenes/CinemachineScene.unity
+    path: Assets/Scenes/CinemachineScene.unity
     guid: 988545712db7abf4d888466eb236cbf2
   - enabled: 1
-    path: Assets/Resources/Scenes/Minigame1.unity
+    path: Assets/Scenes/Minigame1.unity
     guid: 7c27e6a74ab32e944ba90ea0b8ca84e3
   - enabled: 1
-    path: Assets/Resources/Scenes/ARScene.unity
+    path: Assets/Scenes/ARScene.unity
     guid: 5175ccfd8985019489b40d7cbbfe784a
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: ccedef8c3eaa35d4aa2bc038accb9f82, type: 2}

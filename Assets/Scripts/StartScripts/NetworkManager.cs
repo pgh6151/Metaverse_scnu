@@ -69,7 +69,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause) 
     {
         
-        PhotonNetwork.LoadLevel("StartScene");
+        PhotonNetwork.LeaveRoom();
+        Destroy(gameObject);
         print("연결끊김");
        
     }
@@ -81,6 +82,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Sqawn();
+    }
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene(0);
     }
 
 
