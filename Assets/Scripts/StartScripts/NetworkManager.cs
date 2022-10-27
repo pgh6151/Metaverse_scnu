@@ -8,6 +8,20 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    static NetworkManager _instance;
+    public static NetworkManager Instance
+    {
+        get
+        {
+            if (!_instance)
+            {
+                GameObject go = new GameObject();
+                _instance = go.AddComponent<NetworkManager>();
+            }
+            return _instance;
+        }
+    }
+    
     [SerializeField] Text StatusText;
     public InputField NickNameInput;
     [SerializeField] GameObject playerPrefab;
@@ -25,9 +39,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.SerializationRate = 30;
         
         DontDestroyOnLoad(gameObject);
+        
         scene = SceneManager.GetActiveScene();
-
-
+        _instance = this;
     }
 
     private void Update() 
