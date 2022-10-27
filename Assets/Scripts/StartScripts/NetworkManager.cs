@@ -8,12 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    
     [SerializeField] Text StatusText;
     public InputField NickNameInput;
     [SerializeField] GameObject playerPrefab;
     
+    
     Scene scene;
+    GameObject _player;
     
     #region
     private void Awake() 
@@ -25,6 +26,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         DontDestroyOnLoad(gameObject);
         scene = SceneManager.GetActiveScene();
+
+
     }
 
     private void Update() 
@@ -49,10 +52,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         print("서버접속");
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         
+        CoroutineHandler.Instance.StartCoroutine(LoadLevelAsync("CinemachineScene"));
         //씬넘기기
-        PhotonNetwork.LoadLevel(1);
-        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 10}, null);
-        
+        PhotonNetwork.JoinOrCreateRoom("CinemachineRoom", new RoomOptions {MaxPlayers = 10}, null);
+        Debug.Log("OnConnectedToMaster");
     }
 
     public void DisConnect() => PhotonNetwork.Disconnect();
@@ -70,14 +73,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
+        Debug.Log("JoinRoom");
+        OnLevelLoaded();
+
     }
     
     
-    // public override void OnLeftRoom()
-    // {
-    //     PhotonNetwork.LoadLevel(PhotonNetwork.CurrentRoom.Name);
-    // }
+    public override void OnLeftRoom()
+    {
+        Debug.Log("OnLeftRoom");
+    }
     
 
     #endregion
@@ -85,16 +90,44 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // 씬이동시 무조건 이거사용
     public void moveScene_gunha()
     {
-        PhotonNetwork.LoadLevel("Minigame1");
-        PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
+        Debug.Log("moveScene_gunha");
     }
 
     public void MoveToBeach()
     {
-        PhotonNetwork.LoadLevel(3);
-        PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
+        Debug.Log("MoveToBeach");
+        CoroutineHandler.Instance.StartCoroutine(LoadLevelAsync("DemoScene"));
     }
-
+    
     
 
+    IEnumerator LoadLevelAsync(string sceneName)
+    {
+        if (_player)
+            PhotonNetwork.Destroy(_player);
+        
+        PhotonNetwork.IsMessageQueueRunning = false;
+        PhotonNetwork.LoadLevel(sceneName);
+       
+        while (SceneManager.GetActiveScene().name != sceneName)
+        {
+            Debug.Log(PhotonNetwork.LevelLoadingProgress);
+            yield return null;
+        }     
+        PhotonNetwork.IsMessageQueueRunning = true;
+        
+        if (PhotonNetwork.InRoom && !_player && SceneManager.GetActiveScene().name == sceneName)
+            _player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        else
+        {
+            Debug.Log($"PhotonNetwork.InRoom : {PhotonNetwork.InRoom} !_player : {!_player} SceneManager.GetActiveScene().name == sceneName {SceneManager.GetActiveScene().name == sceneName} {SceneManager.GetActiveScene().name}");
+            
+        }
+    }
+
+    void OnLevelLoaded()
+    {
+        if (!_player)
+            _player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
@@ -61,10 +62,11 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
-        photonView.RPC("UpdatePlayer", RpcTarget.All);
         animator = characterBody.GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         PhotonNetwork.IsMessageQueueRunning = true;
+        Debug.Log(SceneManager.GetActiveScene().name);
+        
     
     }
     
@@ -225,13 +227,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
        
     }
     
-    [PunRPC]
-    public void UpdatePlayer()
-    {
-        if (!photonView.IsMine)
-            Destroy(gameObject);
-        
-    }
+    
     
     
 
