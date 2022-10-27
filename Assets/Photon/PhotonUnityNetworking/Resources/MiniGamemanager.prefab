@@ -48,7 +48,7 @@ MonoBehaviour:
   timeText: {fileID: 0}
   StartCanv: {fileID: 0}
   ReStartCanv: {fileID: 0}
-  player: {fileID: 7666505278053907428, guid: 539ef7e96f8ec7741a808d077241ff24, type: 3}
+  player: {fileID: 590964804549884714, guid: f1a1e63d23a173448a318878b934e7df, type: 3}
   ST: 0
   RST: 0
   MoveVec: 0
