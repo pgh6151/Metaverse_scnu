@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 3440
     height: 1357
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Inspector
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 17
+  controlID: 99
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 86
+  controlID: 40
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -166,14 +166,14 @@ MonoBehaviour:
     y: 0
     width: 1623
     height: 670
-  m_MinSize: {x: 101, y: 121}
+  m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
   - {fileID: 14}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -607,9 +607,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -39.979385, y: 301.78403, z: 13.429382}
+    m_Target: {x: -485.38672, y: 72.663635, z: -143.6779}
     speed: 2
-    m_Value: {x: -39.979385, y: 301.78403, z: 13.429382}
+    m_Value: {x: -485.38672, y: 72.663635, z: -143.6779}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -656,13 +656,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.2832629, y: 0.10413559, z: 0.035205, w: 0.9527184}
+    m_Target: {x: -0.017297108, y: -0.7315494, z: -0.010944682, w: 0.6814764}
     speed: 2
-    m_Value: {x: -0.28326377, y: 0.10413591, z: 0.035205107, w: 0.95272136}
+    m_Value: {x: -0.017297164, y: -0.73155177, z: -0.010944718, w: 0.6814786}
   m_Size:
-    m_Target: 340.48267
+    m_Target: 407.44455
     speed: 2
-    m_Value: 340.48267
+    m_Value: 407.44455
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -680,7 +680,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.2832629, y: 0.10413559, z: 0.035205, w: 0.9527184}
+  m_LastSceneViewRotation: {x: 0.16717507, y: -0.16027902, z: -0.031716447, w: -0.97227925}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -746,23 +746,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ae710000
+      m_SelectedIDs: 926e0000
       m_LastClickedID: 0
-      m_ExpandedIDs: a4dbffffa6dbffff5edcffffdcecffff08eeffff0aeeffff7ceeffff46f4ffff48f4fffffef6ffff56f7ffffccf8ffffc6f9fffff4fffffffaa80000
+      m_ExpandedIDs: 9ab3ffffb0c3ffffc8caffff0cd0ffffe0d5ffffa8d9ffffc2e0ffff36f4ffffb6f5fffff8f5ffffb2faffff0efbffff10fbfffff4ffffff7a6d00007c6d00000ad50000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Map
+        m_OriginalName: Map
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -19560
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 9}
       m_SearchString: 
@@ -813,22 +813,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Scenes
+    - Assets/Photon/PhotonUnityNetworking/Resources
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Scenes
+  - Assets/Photon/PhotonUnityNetworking/Resources
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\lsc\Documents\GitHub\Metaverse_scnu
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d0780000
-    m_LastClickedID: 30928
-    m_ExpandedIDs: 00000000a6700000a8700000aa700000ac700000ae700000b0700000b2700000b4700000b670000000ca9a3b
+    m_SelectedIDs: d2760000
+    m_LastClickedID: 30418
+    m_ExpandedIDs: 00000000a0760000a2760000a4760000a6760000a8760000aa760000ac760000ae760000b076000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -856,7 +856,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a6700000a8700000aa700000ac700000ae700000b0700000b2700000b4700000b6700000
+    m_ExpandedIDs: 00000000a0760000a2760000a4760000a6760000a8760000aa760000ac760000ae760000b0760000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

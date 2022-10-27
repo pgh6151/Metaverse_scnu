@@ -28,6 +28,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     public int boost = 1;
 
     //건하 수정 포톤뷰에서 부드러운 움직임을 위한 추가
+    #region gunha
     Vector3 curPos;
     Quaternion curRot = Quaternion.identity;
     public PhotonView PV;
@@ -39,7 +40,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     [SerializeField] private int radius = 1;
 
-    
+    #endregion
     private void Awake() {
 
         DontDestroyOnLoad(gameObject);
@@ -77,7 +78,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             if(SceneManagerHelper.ActiveSceneName == "Minigame1")
             {
                 //미니게임일때 제어
-
                 var mIniGamemanager = GameObject.Find("MiniGamemanager").GetComponent<MIniGamemanager>();
                 if(mIniGamemanager.ST) transform.position += mIniGamemanager.MoveVec * 3f * Time.deltaTime;
                 transform.localEulerAngles = new Vector3(0,0,0);

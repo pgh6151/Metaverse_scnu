@@ -15,14 +15,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     PhotonView PV;
     Scene scene;
     
+    
     #region
     private void Awake() 
     {
         
         DontDestroyOnLoad(gameObject);
         
-        //화면비율 조정필요
+        //화면비율과 가로고정
         Screen.SetResolution(3200, 1440, true);
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+
         PhotonNetwork.SendRate = 60;
         PhotonNetwork.SerializationRate = 30;
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -77,13 +83,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Sqawn();
     }
 
-    
-    
-    // public override void OnLeftRoom()
-    // {
-    //     PhotonNetwork.LoadLevel(PhotonNetwork.CurrentRoom.Name);
-    // }
-    
 
     #endregion
     
