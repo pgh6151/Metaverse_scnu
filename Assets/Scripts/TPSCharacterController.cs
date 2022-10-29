@@ -22,7 +22,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject RotationCanv; // 회전 canvas
     [SerializeField] private GameObject EmotionCanv; // 감정표현 canvas
 
-
+    public static GameObject LocalPlayerInstance;
     Animator animator;
 
     public int boost = 1;
@@ -42,8 +42,13 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     #endregion
     private void Awake() {
-
+        
+        if (photonView.IsMine)
+        {
+            LocalPlayerInstance = gameObject;
+        }
         DontDestroyOnLoad(gameObject);
+
         
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
         NickNameText.color = PV.IsMine ? Color.green : Color.blue;
@@ -232,7 +237,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
        
     }
 
-    [PunRPC]
-    public void DestroyRPC() => Destroy(gameObject);
+
 
 }

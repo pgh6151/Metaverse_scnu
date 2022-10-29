@@ -11,14 +11,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     [SerializeField] Text StatusText;
     [SerializeField] InputField NickNameInput;
+    
 
     PhotonView PV;
     Scene scene;
+
+    // Photon Networking 유튜브 영상 출처
+    private List<PlayerListing> _listings = new List<PlayerListing>();
+    private PlayerListing _playerListing;
     
     
     #region
     private void Awake() 
     {
+        
         
         DontDestroyOnLoad(gameObject);
         
@@ -31,9 +37,35 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.SendRate = 60;
         PhotonNetwork.SerializationRate = 30;
-        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.AutomaticallySyncScene = false;
         
         scene = SceneManager.GetActiveScene();
+    }
+
+    // Photon Networking 유튜브 영상 출처
+    private void GetCurrentRoomPlayers()
+    {
+        if(!PhotonNetwork.IsConnected)
+            return;
+        if(PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null)
+            return;
+        
+        foreach(KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
+        {
+            AddPlayerListing(playerInfo.Value);
+        }
+    }
+
+    // Photon Networking 유튜브 영상 출처
+
+    private void AddPlayerListing(Player player)
+    {
+        PlayerListing listing = Instantiate(_playerListing);
+        if(listing != null)
+        {
+            listing.SetPlayerInfo(player);
+            _listings.Add(listing);
+        }
     }
 
     private void Update() 
@@ -44,7 +76,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if(scene.name == "StartScene")
         {
             StatusText.text = PhotonNetwork.NetworkClientState.ToString();
-        } 
+        }
+        
 
     } 
 
@@ -56,14 +89,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         print("서버접속");
+        print(PhotonNetwork.LocalPlayer.NickName);
+
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         
         //씬넘기기
         SceneManager.LoadScene("CinemachineScene");
-        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 10}, null);
+        PhotonNetwork.JoinOrCreateRoom("StartLobby", new RoomOptions {MaxPlayers = 10}, TypedLobby.Default);
+    
+    }
+    public override void OnCreatedRoom()
+    {
+        print("방만들기 성공!");
+    }
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        print("방만들기 실패");
     }
 
     public void DisConnect() => PhotonNetwork.Disconnect();
+
 
     // 나가기 버튼 누르면 어플리케이션이 나가지도록
     public override void OnDisconnected(DisconnectCause cause) 
@@ -86,10 +131,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
+        
     }
+    
+    
 
 
     #endregion
+
     
     // 씬이동시 무조건 이거사용
     public void moveScene_gunha()
@@ -98,14 +147,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("Minigame1");
         
     }
+    
+    // Photon Networking 유튜브 영상 출처
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        int index = _listings.FindIndex(x => x.Player == otherPlayer);
+        if( index != -1)
+        {
+            Destroy(_listings[index].gameObject);
+            _listings.RemoveAt(index);
+        }
+    }
+    
+
+
     public void ARcam_ON()
     {
         SceneManager.LoadScene("ARScene");
     }
 
     public void Sqawn()
-    {
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+    {   
+        if (TPSCharacterController.LocalPlayerInstance==null)
+        {
+            PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        }
     }
 
 

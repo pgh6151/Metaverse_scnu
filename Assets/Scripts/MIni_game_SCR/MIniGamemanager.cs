@@ -51,6 +51,7 @@ public class MIniGamemanager : MonoBehaviour
         //미니게임 시간제어
         timeActive = ST;
         StartTime();
+
         
         RanSpawner = new Vector3(Random.Range(-7, 4), 1.18f, 44.93f);
 
