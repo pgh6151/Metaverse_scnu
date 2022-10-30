@@ -125,8 +125,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
             yield return null;
         }     
         PhotonNetwork.IsMessageQueueRunning = true;
-        if (_player)
-            DestroySceneObject(_player.GetPhotonView());
+        
         if (PhotonNetwork.InRoom && !_player && SceneManager.GetActiveScene().name == sceneName)
         {
             _player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
@@ -135,7 +134,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
         else
         {
             Debug.Log($"PhotonNetwork.InRoom : {PhotonNetwork.InRoom} !_player : {!_player} SceneManager.GetActiveScene().name == sceneName {SceneManager.GetActiveScene().name == sceneName} {SceneManager.GetActiveScene().name}");
-            
         }
     }
 
