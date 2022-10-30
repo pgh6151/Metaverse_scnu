@@ -12,8 +12,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [SerializeField] Text StatusText;
     [SerializeField] InputField NickNameInput;
     
-
-    PhotonView PV;
+    public PhotonView PV;
     Scene scene;
 
     // Photon Networking 유튜브 영상 출처
@@ -34,12 +33,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Screen.autorotateToLandscapeRight = true;
         Screen.autorotateToPortrait = false;
         Screen.autorotateToPortraitUpsideDown = false;
-
+        
+        //씬 자동동기화, 핑조절
         PhotonNetwork.SendRate = 60;
         PhotonNetwork.SerializationRate = 30;
-        PhotonNetwork.AutomaticallySyncScene = false;
+        PhotonNetwork.AutomaticallySyncScene = true;
         
         scene = SceneManager.GetActiveScene();
+
+
     }
 
     // Photon Networking 유튜브 영상 출처
@@ -96,7 +98,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //씬넘기기
         SceneManager.LoadScene("CinemachineScene");
         PhotonNetwork.JoinOrCreateRoom("StartLobby", new RoomOptions {MaxPlayers = 10}, TypedLobby.Default);
-    
+        
     }
     public override void OnCreatedRoom()
     {
@@ -126,16 +128,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        Sqawn();
+        
+        PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
+        
     }
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
-        
     }
     
-    
-
 
     #endregion
 
@@ -145,6 +146,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         
         SceneManager.LoadScene("Minigame1");
+        PhotonNetwork.CreateRoom("MinigameRoom", new RoomOptions {MaxPlayers = 10}, TypedLobby.Default);
+        PhotonNetwork.JoinRoom("GameRoom");
+        // PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
         
     }
     
@@ -158,20 +162,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             _listings.RemoveAt(index);
         }
     }
+
+    public void OnPhotonInstantiate()
+    {
+
+    }
     
 
 
     public void ARcam_ON()
     {
         SceneManager.LoadScene("ARScene");
+        
     }
 
     public void Sqawn()
     {   
-        if (TPSCharacterController.LocalPlayerInstance==null)
-        {
-            PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
-        }
+        // if (TPSCharacterController.LocalPlayerInstance==null)
+        // {
+        //     PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
+        // }
     }
 
 
