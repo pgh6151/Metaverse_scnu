@@ -15,7 +15,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public PhotonView PV;
     Scene scene;
 
-    // Photon Networking 유튜브 영상 출처
+    // Photon Networking 유튜브 영상 출처 (이거아님)
     private List<PlayerListing> _listings = new List<PlayerListing>();
     private PlayerListing _playerListing;
     
@@ -118,6 +118,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         PhotonNetwork.LeaveRoom();
         Destroy(gameObject);
+
+        SceneManager.LoadScene(0);
         print("연결끊김");
        
     }
@@ -128,20 +130,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        
+        //(볼것) 방마다 스폰 새로할수 있도록
         PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
         
     }
     public override void OnLeftRoom()
     {
-        SceneManager.LoadScene(0);
+        
     }
     
 
     #endregion
 
     
-    // 씬이동시 무조건 이거사용
+    // 씬이동시 이거사용 (볼것)
     public void moveScene_gunha()
     {
         
@@ -163,10 +165,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void OnPhotonInstantiate()
-    {
-
-    }
     
 
 
