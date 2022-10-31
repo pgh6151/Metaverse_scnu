@@ -39,15 +39,15 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject Joystick; // 자기 자신일때만 조이스틱 활성화
 
     [SerializeField] private int radius = 1;
-
+    
     #endregion
     private void Awake() {
-        
+
         if (photonView.IsMine)
         {
             LocalPlayerInstance = gameObject;
         }
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
 
         
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
@@ -87,7 +87,10 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
                 if(mIniGamemanager.ST) transform.position += mIniGamemanager.MoveVec * 3f * Time.deltaTime;
                 transform.localEulerAngles = new Vector3(0,0,0);
                 Debug.Log(mIniGamemanager.ST);
-
+                
+                
+                //미니게임일때 제어
+                this.gameObject.transform.localEulerAngles = new Vector3(0,0,0);
 
                 //미니게임일때의 켄버스 제어
                 Joystick.SetActive(false);
@@ -162,12 +165,12 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             
             // 주찬 수정 => transform 이동은 벽을 뚫는 버그가 많아서 rigidbody.velocity 이동으로 바꿨다.
             // 속도 값 받아옴 (mouse input을 통해)
-            Vector3 playerVelocity = new Vector3(moveInput.x, 0f, moveInput.y);
+             Vector3 playerVelocity = new Vector3(moveInput.x, 0f, moveInput.y);
              // 로컬 -> 월드 좌표로 바꿨고 => 회전 이후에도 영향이 가기 위함
              // 대각선 이동이 직선 이동과 같게 만들어주기 위해 nomalized하였다.
-            Vector3 moveDir = transform.TransformDirection(playerVelocity).normalized;
+             Vector3 moveDir = transform.TransformDirection(playerVelocity).normalized;
              // 동기화를 위한 Time.deltaTime, 조정 값인 moveSpeed
-            _rigidbody.velocity = moveDir * (Time.deltaTime * moveSpeed * boost);
+             _rigidbody.velocity = moveDir * (Time.deltaTime * moveSpeed * boost);
              
              
         }
@@ -236,7 +239,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         }
        
     }
-
-
+    
+    
 
 }
