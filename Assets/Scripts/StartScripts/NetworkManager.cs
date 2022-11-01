@@ -97,8 +97,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // PhotonNetwork.JoinLobby();
         //씬넘기기
         
-        PhotonNetwork.LoadLevel("CinemachineScene");
         PhotonNetwork.JoinOrCreateRoom("schoolRoom", new RoomOptions {MaxPlayers = 10}, null);
+        PhotonNetwork.LoadLevel("CinemachineScene");
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
@@ -157,9 +157,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     // 씬이동시 이거사용 (볼것)
     public void moveScene_gunha()
-    {  
-        SceneManager.LoadScene(2);
-        
+    {
+        SceneSync("Minigame1");
     }
     
     // Photon Networking 유튜브 영상 출처
@@ -173,7 +172,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    
+    IEnumerator SceneSync(string sceneName)
+    {
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel(sceneName);
+        while (PhotonNetwork.LevelLoadingProgress < 1)
+        {
+            Debug.Log(PhotonNetwork.LevelLoadingProgress);
+            yield return null;
+        }
+        Debug.Log("레벨 로딩이 완료되었습니다.");
+        
+    }
 
 
     public void ARcam_ON()
