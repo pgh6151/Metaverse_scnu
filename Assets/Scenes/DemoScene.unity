@@ -40920,7 +40920,7 @@ GameObject:
   - component: {fileID: 1654285935}
   - component: {fileID: 1654285936}
   m_Layer: 0
-  m_Name: VolleyBallSpawner
+  m_Name: '@VolleyBallManager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
