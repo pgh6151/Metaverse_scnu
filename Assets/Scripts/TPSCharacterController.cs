@@ -91,13 +91,13 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     
     void Update()
     {
-        if(!PV.IsMine && SceneManagerHelper.ActiveSceneName == "Minigame1")
+        /*if(!PV.IsMine && SceneManagerHelper.ActiveSceneName == "Minigame1")
         {
             gameObject.SetActive(false);
         }else if (!PV.IsMine && SceneManagerHelper.ActiveSceneName == "CinemachineScene")
         {
             gameObject.SetActive(true);
-        }
+        }*/
 
         //ismine 일때만 구동해서 네트워크 제어
         if(PV.IsMine)
