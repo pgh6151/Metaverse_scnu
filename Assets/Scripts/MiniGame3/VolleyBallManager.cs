@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mapbox.Unity.Utilities;
 using MiniGame3;
+using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -46,14 +47,7 @@ public class VolleyBallManager : MonoBehaviour
 
     void Init()
     {
-        var objs = FindObjectsOfType<VolleyBallManager>();
-        if (objs.Length != 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
-        _volleyBall = FindObjectOfType<VolleyBall>();
+        _volleyBall = PhotonNetwork.Instantiate("Volleyball", Vector3.zero, Quaternion.identity).GetComponent<VolleyBall>();
         _score = FindObjectOfType<Score>();
         _time = _timer;
         blueWinTrans = GameObject.Find("BlueWinParticles").transform;
@@ -277,4 +271,6 @@ public class VolleyBallManager : MonoBehaviour
             ResetRound(_isBlueGetPoint);
         }
     }
+
+    
 }

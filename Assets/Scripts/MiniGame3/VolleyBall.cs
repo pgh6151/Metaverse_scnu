@@ -1,10 +1,11 @@
 using System;
 using ExitGames.Client.Photon.StructWrapping;
 using MiniGame3;
+using Photon.Pun;
 using UnityEngine;
 
 
-public class VolleyBall : MonoBehaviour
+public class VolleyBall : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] private float power = 5f;
     [SerializeField] float verticalPower = 3f;
@@ -62,6 +63,22 @@ public class VolleyBall : MonoBehaviour
             case "Sky":
                 _isPassedSky = true;
                 break;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_rigidbody.position);
+            stream.SendNext(_rigidbody.rotation);
+            stream.SendNext(_rigidbody.velocity);
+        }
+        else
+        {
+            _rigidbody.position = (Vector3)stream.ReceiveNext();
+            _rigidbody.rotation = (Quaternion)stream.ReceiveNext();
+            _rigidbody.velocity = (Vector3)stream.ReceiveNext();
         }
     }
 }

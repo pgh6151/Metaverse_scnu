@@ -176,6 +176,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         CoroutineHandler.Instance.StartCoroutine(SceneSync("Minigame1"));
     }
     
+    public void moveScene_juchan()
+    {
+        CoroutineHandler.Instance.StartCoroutine(SceneSync("DemoScene"));
+    }
+
+    public void BackToLobby()
+    {
+        CoroutineHandler.Instance.StartCoroutine(SceneSync("CinemachineScene"));
+    }
+
     // Photon Networking 유튜브 영상 출처
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
