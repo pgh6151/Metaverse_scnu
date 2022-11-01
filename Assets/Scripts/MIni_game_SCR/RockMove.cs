@@ -30,7 +30,7 @@ public class RockMove : MonoBehaviour
 
         if(other.gameObject.tag == "End")
         {
-            PhotonNetwork.Destroy(gameObject);
+            Destroy(gameObject);
         }
         if(other.gameObject.tag == "Player")
         {

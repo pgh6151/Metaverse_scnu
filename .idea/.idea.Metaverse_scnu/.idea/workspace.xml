@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/MIni_game_SCR/MIniGamemanager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MIni_game_SCR/MIniGamemanager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MIni_game_SCR/RockMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MIni_game_SCR/RockMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
