@@ -96,11 +96,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         // PhotonNetwork.JoinLobby();
         //씬넘기기
-        if(PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.LoadLevel("CinemachineScene");
-        }
         
+        PhotonNetwork.LoadLevel("CinemachineScene");
         PhotonNetwork.JoinOrCreateRoom("schoolRoom", new RoomOptions {MaxPlayers = 10}, null);
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
