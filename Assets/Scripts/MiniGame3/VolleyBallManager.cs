@@ -27,12 +27,12 @@ public class VolleyBallManager : MonoBehaviour
     List<ParticleSystem> blueParticles = new List<ParticleSystem>();
     List<ParticleSystem> redParticles = new List<ParticleSystem>();
 
-    private static VolleyBallManager _instance;
+    static VolleyBallManager _instance;
     public static VolleyBallManager Instance
     {
         get
         {
-            if (_instance == null)
+            if (!_instance)
             {
                 GameObject go = new GameObject("@VolleyBallManager");
                 _instance = go.AddComponent<VolleyBallManager>();
@@ -47,7 +47,9 @@ public class VolleyBallManager : MonoBehaviour
 
     void Init()
     {
-        _volleyBall = PhotonNetwork.Instantiate("Volleyball", Vector3.zero, Quaternion.identity).GetComponent<VolleyBall>();
+        _instance = this;
+        if (PhotonNetwork.IsMasterClient)
+            _volleyBall = PhotonNetwork.Instantiate("Volleyball", Vector3.zero, Quaternion.identity).GetComponent<VolleyBall>();
         _score = FindObjectOfType<Score>();
         _time = _timer;
         blueWinTrans = GameObject.Find("BlueWinParticles").transform;
