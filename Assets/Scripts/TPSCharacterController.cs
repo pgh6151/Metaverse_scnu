@@ -93,10 +93,10 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(!PV.IsMine && SceneManagerHelper.ActiveSceneName == "Minigame1")
         {
-            gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }else if (!PV.IsMine && SceneManagerHelper.ActiveSceneName == "CinemachineScene")
         {
-            gameObject.SetActive(true);
+            this.gameObject.SetActive(true);
         }
 
         //ismine 일때만 구동해서 네트워크 제어
@@ -119,6 +119,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
             }else if(SceneManagerHelper.ActiveSceneName == "CinemachineScene")
             {
+                
                 Joystick.SetActive(true);
                 RotationCanv.SetActive(true);
                 EmotionCanv.SetActive(true);
