@@ -1476,6 +1476,7 @@ MonoBehaviour:
   moveCamera: {fileID: 590964804533133667}
   RotationCanv: {fileID: 590964804865315665}
   EmotionCanv: {fileID: 590964805066920325}
+  CurrentPlayer: {fileID: 590964804549884714}
   boost: 1
   PV: {fileID: 590964804549884725}
   NickNameText: {fileID: 5617056172602933874}

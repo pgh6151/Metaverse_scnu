@@ -21,6 +21,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     [SerializeField] private GameObject RotationCanv; // 회전 canvas
     [SerializeField] private GameObject EmotionCanv; // 감정표현 canvas
+    [SerializeField] private GameObject CurrentPlayer;
 
     public static GameObject LocalPlayerInstance;
     Animator animator;
@@ -91,13 +92,14 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     
     void Update()
     {
-        /*if(!PV.IsMine && SceneManagerHelper.ActiveSceneName == "Minigame1")
+        if(!PV.IsMine && SceneManagerHelper.ActiveSceneName == "Minigame1")
         {
-            gameObject.SetActive(false);
+            CurrentPlayer.SetActive(false);
         }else if (!PV.IsMine && SceneManagerHelper.ActiveSceneName == "CinemachineScene")
         {
-            gameObject.SetActive(true);
-        }*/
+            print("다른클라");
+            CurrentPlayer.SetActive(true);
+        }
 
         //ismine 일때만 구동해서 네트워크 제어
         if(PV.IsMine)
