@@ -12,7 +12,9 @@ public class MIniGamemanager : MonoBehaviour
     // 스톱워치
     [SerializeField] float timeStart;
     [SerializeField] Text timeText;
-
+    [SerializeField] GameObject startBtn;
+    [SerializeField] GameObject exitBtn;
+    
     bool timeActive = false;
 
     
@@ -40,9 +42,15 @@ public class MIniGamemanager : MonoBehaviour
     void Start()
     {   
         timeText.text = timeStart.ToString("F2");
-    
+        
         ST = false;
         RST = false;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            startBtn.SetActive(true);
+            exitBtn.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -69,7 +77,6 @@ public class MIniGamemanager : MonoBehaviour
 
     public void ST_BTN()
     {
-
         timeStart = 0f;
         StartCanv.SetActive(false);
         Debug.Log("작동");
@@ -79,12 +86,14 @@ public class MIniGamemanager : MonoBehaviour
     {
         ST = true;
         timeStart = 0f;
-        ReStartCanv.SetActive(false);
+        if (PhotonNetwork.IsMasterClient)
+            ReStartCanv.SetActive(false);
     }
 
     public void Exit_BTN()
     {
-        SceneManager.LoadScene("CinemachineScene");
+        if (PhotonNetwork.IsMasterClient)
+            CoroutineHandler.Instance.StartCoroutine(NetworkManager.Instance.SceneSync("CinemachineScene"));
     }
 
     public void StartTime()
@@ -114,11 +123,15 @@ public class MIniGamemanager : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1f);
-            Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
-            
+            PhotonNetwork.Instantiate("rock", RanSpawner, gameObject.transform.rotation);
         }
-        
     }
 
+    public void RockTrigger()
+    {
+        if (PhotonNetwork.IsMasterClient)
+            ReStartCanv.SetActive(true);
+        ST = false;
+    }
     
 }

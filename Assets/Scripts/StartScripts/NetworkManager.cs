@@ -8,7 +8,22 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    
+    static NetworkManager _instance;
+
+    public static NetworkManager Instance
+    {
+        get
+        {
+            if (!_instance)
+            {
+                GameObject go = new GameObject("NetworkManager");
+                _instance = go.AddComponent<NetworkManager>();
+            }
+
+            return _instance;
+        }
+    }
+
     [SerializeField] Text StatusText;
     [SerializeField] InputField NickNameInput;
     
@@ -172,7 +187,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    IEnumerator SceneSync(string sceneName)
+    public IEnumerator SceneSync(string sceneName)
     {
         if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.LoadLevel(sceneName);

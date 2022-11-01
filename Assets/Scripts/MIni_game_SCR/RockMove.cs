@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class RockMove : MonoBehaviour
@@ -29,13 +30,12 @@ public class RockMove : MonoBehaviour
 
         if(other.gameObject.tag == "End")
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
         if(other.gameObject.tag == "Player")
         {
-            var mIniGamemanager = GameObject.Find("MiniGamemanager").GetComponent<MIniGamemanager>();
-            mIniGamemanager.ReStartCanv.SetActive(true);
-            mIniGamemanager.ST = false;
+            var mIniGamemanager = GameObject.Find("MinigameCanv").GetComponent<MIniGamemanager>();
+            mIniGamemanager.RockTrigger();
         }
     }
 
