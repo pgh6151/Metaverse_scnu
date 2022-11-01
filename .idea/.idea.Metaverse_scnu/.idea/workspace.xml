@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StartScripts/NetworkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StartScripts/NetworkManager.cs" afterDir="false" />
-    </list>
+    <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -108,7 +105,7 @@
       <workItem from="1665385218073" duration="256000" />
       <workItem from="1665385500458" duration="11069000" />
       <workItem from="1665814548117" duration="8868000" />
-      <workItem from="1667263411979" duration="950000" />
+      <workItem from="1667263411979" duration="1286000" />
     </task>
     <servers />
   </component>
