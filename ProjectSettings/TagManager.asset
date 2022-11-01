@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - End
   - Sky
+  - Wall
+  - Replay
   layers:
   - Default
   - TransparentFX

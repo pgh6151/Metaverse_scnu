@@ -12,12 +12,12 @@ public class Col : MonoBehaviour
         state = false;
     }
 
-// 벽 충돌시 화면 색 변경 후 씬 새로고침(씬 인덱스 변경)
-    void OnCollisionEnter(Collision collision)    {
+    //벽 충돌시 화면 색 변경 후 씬 새로고침
+    //OnCollisionEnte(충돌 체크)
+    void OnCollisionEnter(Collision collision)    {
         if (collision.collider.gameObject.CompareTag("Wall"))
         {
             ColScreen.SetActive(true);
-            Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene("MazeScene");
         }
     }
