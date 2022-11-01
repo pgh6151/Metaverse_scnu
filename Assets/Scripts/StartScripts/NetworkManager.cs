@@ -12,7 +12,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [SerializeField] Text StatusText;
     [SerializeField] InputField NickNameInput;
     
-    public PhotonView PV;
     Scene scene;
 
     // Photon Networking 유튜브 영상 출처 (이거아님)
@@ -45,30 +44,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     // Photon Networking 유튜브 영상 출처
-    private void GetCurrentRoomPlayers()
-    {
-        if(!PhotonNetwork.IsConnected)
-            return;
-        if(PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null)
-            return;
+    // private void GetCurrentRoomPlayers()
+    // {
+    //     if(!PhotonNetwork.IsConnected)
+    //         return;
+    //     if(PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null)
+    //         return;
         
-        foreach(KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
-        {
-            AddPlayerListing(playerInfo.Value);
-        }
-    }
+    //     foreach(KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
+    //     {
+    //         AddPlayerListing(playerInfo.Value);
+    //     }
+    // }
 
     // Photon Networking 유튜브 영상 출처
 
-    private void AddPlayerListing(Player player)
-    {
-        PlayerListing listing = Instantiate(_playerListing);
-        if(listing != null)
-        {
-            listing.SetPlayerInfo(player);
-            _listings.Add(listing);
-        }
-    }
+    // private void AddPlayerListing(Player player)
+    // {
+    //     PlayerListing listing = Instantiate(_playerListing);
+    //     if(listing != null)
+    //     {
+    //         listing.SetPlayerInfo(player);
+    //         _listings.Add(listing);
+    //     }
+    // }
 
     private void Update() 
     {
@@ -94,12 +93,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         print(PhotonNetwork.LocalPlayer.NickName);
 
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
-        
+
+        // PhotonNetwork.JoinLobby();
         //씬넘기기
-        SceneManager.LoadScene("CinemachineScene");
-        PhotonNetwork.JoinOrCreateRoom("StartLobby", new RoomOptions {MaxPlayers = 10}, TypedLobby.Default);
+        if(PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("CinemachineScene");
+        }
         
+        PhotonNetwork.JoinOrCreateRoom("schoolRoom", new RoomOptions {MaxPlayers = 10}, null);
     }
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+
+    }
+    
     public override void OnCreatedRoom()
     {
         print("방만들기 성공!");
@@ -128,29 +136,32 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Application.Quit();
     }
+
+    // public override void OnJoinedLobby()
+    // {
+    //     SceneManager.LoadScene("CinemachineScene");
+    //     PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
+    // }
+    
     public override void OnJoinedRoom()
     {
         //(볼것) 방마다 스폰 새로할수 있도록
-        PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
-        
+        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+
     }
     public override void OnLeftRoom()
     {
         
     }
-    
 
     #endregion
 
+    public void LeaveRoom() => PhotonNetwork.LeaveRoom();
     
     // 씬이동시 이거사용 (볼것)
     public void moveScene_gunha()
-    {
-        
-        SceneManager.LoadScene("Minigame1");
-        PhotonNetwork.CreateRoom("MinigameRoom", new RoomOptions {MaxPlayers = 10}, TypedLobby.Default);
-        PhotonNetwork.JoinRoom("GameRoom");
-        // PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
+    {  
+        SceneManager.LoadScene(2);
         
     }
     
@@ -174,13 +185,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
     }
 
-    public void Sqawn()
-    {   
-        // if (TPSCharacterController.LocalPlayerInstance==null)
-        // {
-        //     PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
-        // }
-    }
+    // public void Sqawn()
+    // {   
+    //      if (TPSCharacterController.LocalPlayerInstance==null)
+    //      {
+    //          PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
+    //      }
+    // }
 
 
     

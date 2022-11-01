@@ -29,6 +29,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     //건하 수정 포톤뷰에서 부드러운 움직임을 위한 추가
     #region gunha
+
     Vector3 curPos;
     Quaternion curRot = Quaternion.identity;
     public PhotonView PV;
@@ -41,13 +42,15 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private int radius = 1;
     
     #endregion
+
+
     private void Awake() {
 
         if (photonView.IsMine)
         {
             LocalPlayerInstance = gameObject;
         }
-        // DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
 
         
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
@@ -65,10 +68,22 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         }
 
     }
+    void CalledOnLevelWasLoaded(int level)
+    {
+        if(!Physics.Raycast(transform.position, -Vector3.up, 5f))
+        {
+            transform.position = new Vector3(0f,0f,0f);
+        }
+    }
+
+    void OnLevelWasLoaded(int level)
+    {
+        this.CalledOnLevelWasLoaded(level);
+    }
 
     void Start()
     {
-
+        OnLevelWasLoaded(SceneManagerHelper.ActiveSceneBuildIndex);
         animator = characterBody.GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
     
@@ -76,7 +91,14 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     
     void Update()
     {
-        
+        if(!PV.IsMine && SceneManagerHelper.ActiveSceneName == "Minigame1")
+        {
+            gameObject.SetActive(false);
+        }else if (!PV.IsMine && SceneManagerHelper.ActiveSceneName == "CinemachineScene")
+        {
+            gameObject.SetActive(true);
+        }
+
         //ismine 일때만 구동해서 네트워크 제어
         if(PV.IsMine)
         {
@@ -86,8 +108,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
                 var mIniGamemanager = GameObject.Find("MiniGamemanager").GetComponent<MIniGamemanager>();
                 if(mIniGamemanager.ST) transform.position += mIniGamemanager.MoveVec * 3f * Time.deltaTime;
                 transform.localEulerAngles = new Vector3(0,0,0);
-                Debug.Log(mIniGamemanager.ST);
-                
                 
                 //미니게임일때 제어
                 this.gameObject.transform.localEulerAngles = new Vector3(0,0,0);
@@ -171,7 +191,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
              Vector3 moveDir = transform.TransformDirection(playerVelocity).normalized;
              // 동기화를 위한 Time.deltaTime, 조정 값인 moveSpeed
              _rigidbody.velocity = moveDir * (Time.deltaTime * moveSpeed * boost);
-             
              
         }
     }
