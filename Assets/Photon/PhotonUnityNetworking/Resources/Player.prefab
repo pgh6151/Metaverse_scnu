@@ -1429,6 +1429,7 @@ GameObject:
   - component: {fileID: 590964804549884715}
   - component: {fileID: 3443089314615038211}
   - component: {fileID: 6518382480334692859}
+  - component: {fileID: 6679654650393560969}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1751,6 +1752,19 @@ MonoBehaviour:
   trySamplingRateMatch: 0
   useMicrophoneTypeFallback: 1
   recordOnlyWhenJoined: 1
+--- !u!114 &6679654650393560969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590964804549884714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d212b639b226b43a049e726838e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
 --- !u!1 &590964804573995149
 GameObject:
   m_ObjectHideFlags: 0
