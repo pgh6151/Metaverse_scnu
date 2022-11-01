@@ -105,8 +105,8 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             if(SceneManagerHelper.ActiveSceneName == "Minigame1")
             {
                 //미니게임일때 제어
-                var mIniGamemanager = GameObject.Find("MiniGamemanager").GetComponent<MIniGamemanager>();
-                if(mIniGamemanager.ST) transform.position += mIniGamemanager.MoveVec * 3f * Time.deltaTime;
+                var MIniGamemanager = GameObject.Find("MinigameCanv").GetComponent<MIniGamemanager>();
+                if(MIniGamemanager.ST) transform.position += MIniGamemanager.MoveVec * 3f * Time.deltaTime;
                 transform.localEulerAngles = new Vector3(0,0,0);
                 
                 //미니게임일때 제어

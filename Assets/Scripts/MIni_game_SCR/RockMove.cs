@@ -34,8 +34,8 @@ public class RockMove : MonoBehaviour
         }
         if(other.gameObject.tag == "Player")
         {
-            var mIniGamemanager = GameObject.Find("MinigameCanv").GetComponent<MIniGamemanager>();
-            mIniGamemanager.RockTrigger();
+            var MIniGamemanager = GameObject.Find("MinigameCanv").GetComponent<MIniGamemanager>();
+            MIniGamemanager.RockTrigger();
         }
     }
 
