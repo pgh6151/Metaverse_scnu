@@ -86,8 +86,7 @@ public class MIniGamemanager : MonoBehaviour
     {
         ST = true;
         timeStart = 0f;
-        if (PhotonNetwork.IsMasterClient)
-            ReStartCanv.SetActive(false);
+        ReStartCanv.SetActive(false);
     }
 
     public void Exit_BTN()
