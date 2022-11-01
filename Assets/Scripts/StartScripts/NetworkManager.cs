@@ -158,7 +158,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // 씬이동시 이거사용 (볼것)
     public void moveScene_gunha()
     {
-        StartCoroutine(SceneSync("Minigame1"));
+        CoroutineHandler.Instance.StartCoroutine(SceneSync("Minigame1"));
     }
     
     // Photon Networking 유튜브 영상 출처
@@ -182,7 +182,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             yield return null;
         }
         Debug.Log("레벨 로딩이 완료되었습니다.");
-        
     }
 
 
