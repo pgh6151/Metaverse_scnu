@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatusText: {fileID: 9106016657542545717, guid: a719cbfff0191b8469b0ff18593a81e3, type: 3}
   NickNameInput: {fileID: 8184806733416418866, guid: e1c2b4357c7b2be42ba6c412a54d5c2f, type: 3}
+  playerPrefab: {fileID: 590964804549884714, guid: f1a1e63d23a173448a318878b934e7df, type: 3}

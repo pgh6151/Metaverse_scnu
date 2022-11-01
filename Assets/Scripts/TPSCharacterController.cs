@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 {
     private float rotationX;
+
     
     private Rigidbody _rigidbody;
     [SerializeField] private float moveSpeed = 10f; // 이동속도 상향 필요
@@ -42,10 +43,10 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     
     private void Awake() {
-
+        
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
         NickNameText.color = PV.IsMine ? Color.green : Color.blue;
-
+        DontDestroyOnLoad(gameObject);
         if(PV.IsMine)
         {
             Cam.SetActive(true);
@@ -54,7 +55,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         {
             Cam.SetActive(false);
             Joystick.SetActive(false);
-            
         }
 
     }
@@ -64,7 +64,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         animator = characterBody.GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         PhotonNetwork.IsMessageQueueRunning = true;
-        Debug.Log(SceneManager.GetActiveScene().name);
         
     }
     
@@ -188,6 +187,39 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         float tempRotation = Mathf.Clamp(rotationX, -90f, 90f);
         moveCamera.localRotation = Quaternion.Euler(tempRotation * rotateSpeed, 0f, 0f);
         
+    }
+    
+    public void DestroySceneObject()
+    {
+        if (PhotonNetwork.IsConnected)
+        {
+            if (photonView.isRuntimeInstantiated) // instantiated at runtime
+            {
+                if (!photonView.IsMine)
+                {
+                    PhotonNetwork.Destroy(photonView);
+                }
+                else
+                {
+                    photonView.RequestOwnership();
+                }
+            }
+            else // scene view loaded in the scene
+            {
+                photonView.RPC("LocalSelfDestroy", RpcTarget.AllBuffered);
+                //otherPhotonView.RPC("LocalDestroy", RpcTarget.AllBuffered, photonView.ViewID); // another option
+            }
+        }
+        else
+        {
+            Destroy(photonView); // photonView.LocalSelfDestroy();
+        }
+    }
+    
+    [PunRPC]
+    void LocalSelfDestroy()
+    {
+        Destroy(photonView);
     }
 
     //변수동기화 필요시 여기에서 제어

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mapbox.Unity.Utilities;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -9,8 +10,8 @@ using UnityEngine.SceneManagement;
 public class NetworkManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
 {
     static NetworkManager _instance;
-    static List<PhotonView> photonViewsToDestroy = new List<PhotonView>();
-
+    public static GameObject spawner;
+    
     public static NetworkManager Instance
     {
         get
@@ -30,18 +31,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
     
     
     Scene scene;
-    GameObject _player;
     
     #region
     private void Awake() 
     {
         //화면비율 조정필요
-        Screen.SetResolution(1440, 3200, false);
+        // Screen.SetResolution(1440, 3200, false);
+        DontDestroyOnLoad(gameObject);
         PhotonNetwork.SendRate = 60;
         PhotonNetwork.SerializationRate = 30;
-        DontDestroyOnLoad(gameObject);
         scene = SceneManager.GetActiveScene();
         _instance = this;
+
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     private void Update() 
@@ -65,10 +67,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
     {
         print("서버접속");
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
-        
         //씬넘기기
-        PhotonNetwork.JoinOrCreateRoom("CinemachineRoom", new RoomOptions {MaxPlayers = 10}, null);
         Debug.Log("OnConnectedToMaster");
+    }
+
+    public void EnterRoom()
+    {
+        PhotonNetwork.JoinOrCreateRoom("CinemachineRoom", new RoomOptions {MaxPlayers = 10}, null);
     }
 
     public void DisConnect() => PhotonNetwork.Disconnect();
@@ -88,6 +93,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
     {
         Debug.Log("JoinRoom");
         CoroutineHandler.Instance.StartCoroutine(LoadLevelAsync("CinemachineScene"));
+        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
     }
     
     
@@ -109,13 +115,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
     {
         Debug.Log("MoveToBeach");
         CoroutineHandler.Instance.StartCoroutine(LoadLevelAsync("DemoScene"));
-        
     }
     
     
 
     IEnumerator LoadLevelAsync(string sceneName)
     {
+        // if (player)
+        //     PhotonNetwork.Destroy(player);
         PhotonNetwork.IsMessageQueueRunning = false;
         PhotonNetwork.LoadLevel(sceneName);
        
@@ -123,55 +130,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
         {
             Debug.Log(PhotonNetwork.LevelLoadingProgress);
             yield return null;
-        }     
+        }
         PhotonNetwork.IsMessageQueueRunning = true;
+    }
+
+    void DoDestroy()
+    {
         
-        if (PhotonNetwork.InRoom && !_player && SceneManager.GetActiveScene().name == sceneName)
-        {
-            _player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
-            Debug.Log("Instantiate");
-        }
-        else
-        {
-            Debug.Log($"PhotonNetwork.InRoom : {PhotonNetwork.InRoom} !_player : {!_player} SceneManager.GetActiveScene().name == sceneName {SceneManager.GetActiveScene().name == sceneName} {SceneManager.GetActiveScene().name}");
-        }
     }
 
     
-    
-    public static void DestroySceneObject(PhotonView photonView)
-    {
-        if (PhotonNetwork.IsConnected)
-        {
-            if (photonView.isRuntimeInstantiated) // instantiated at runtime
-            {
-                if (photonView.IsMine)
-                {
-                    PhotonNetwork.Destroy(photonView);
-                }
-                else
-                {
-                    photonView.RequestOwnership();
-                    photonViewsToDestroy.Add(photonView);
-                }
-            }
-            else // scene view loaded in the scene
-            {
-                photonView.RPC("LocalSelfDestroy", RpcTarget.AllBuffered);
-                //otherPhotonView.RPC("LocalDestroy", RpcTarget.AllBuffered, photonView.ViewID); // another option
-            }
-        }
-        else
-        {
-            Destroy(photonView); // photonView.LocalSelfDestroy();
-        }
-    }
-
-    [PunRPC]
-    void LocalSelfDestroy()
-    {
-        Destroy(photonView);
-    }
 
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
