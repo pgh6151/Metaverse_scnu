@@ -158,7 +158,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // 씬이동시 이거사용 (볼것)
     public void moveScene_gunha()
     {
-        SceneSync("Minigame1");
+        StartCoroutine(SceneSync("Minigame1"));
     }
     
     // Photon Networking 유튜브 영상 출처
