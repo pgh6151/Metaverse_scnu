@@ -49,7 +49,8 @@ public class VolleyBallManager : MonoBehaviour
     {
         _instance = this;
         if (PhotonNetwork.IsMasterClient)
-            _volleyBall = PhotonNetwork.Instantiate("Volleyball", Vector3.zero, Quaternion.identity).GetComponent<VolleyBall>();
+            PhotonNetwork.Instantiate("Volleyball", Vector3.zero, Quaternion.identity).GetComponent<VolleyBall>();
+        _volleyBall = FindObjectOfType<VolleyBall>();
         _score = FindObjectOfType<Score>();
         _time = _timer;
         blueWinTrans = GameObject.Find("BlueWinParticles").transform;
