@@ -22,11 +22,11 @@ public class VolleyBallManager : MonoBehaviour
     [SerializeField] Transform blueWinTrans;
     [SerializeField] Transform redWinTrans;
 
-    VolleyBall _volleyBall;
     Score _score;
     List<ParticleSystem> blueParticles = new List<ParticleSystem>();
     List<ParticleSystem> redParticles = new List<ParticleSystem>();
 
+    VolleyBall _volleyBall;
     static VolleyBallManager _instance;
     public static VolleyBallManager Instance
     {
@@ -48,8 +48,8 @@ public class VolleyBallManager : MonoBehaviour
     void Init()
     {
         _instance = this;
-        if (PhotonNetwork.IsMasterClient)
-            PhotonNetwork.Instantiate("Volleyball", Vector3.zero, Quaternion.identity).GetComponent<VolleyBall>();
+        // if (PhotonNetwork.IsMasterClient)
+        //     PhotonNetwork.Instantiate("Volleyball", Vector3.zero, Quaternion.identity).GetComponent<VolleyBall>();
         _volleyBall = FindObjectOfType<VolleyBall>();
         _score = FindObjectOfType<Score>();
         _time = _timer;
