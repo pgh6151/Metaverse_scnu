@@ -23,13 +23,22 @@ public class Col : MonoBehaviour
     {
         if (collision.collider.gameObject.CompareTag("Wall"))
         {
-            ColScreen.SetActive(true);
             Char.transform.position = new Vector3(0, 0, 0);
+            ColScreen.SetActive(true);
+            Time.timeScale = 0;
+
             Char.GetComponent<Timer>().CurrentTime = 0;
             Lever.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            StartCoroutine(Respawn());
         }
     }
 
-
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        ColScreen.SetActive(false);
+        yield return new WaitForSecondsRealtime(0.1f);
+        Time.timeScale = 1;
+    }
 
 }
