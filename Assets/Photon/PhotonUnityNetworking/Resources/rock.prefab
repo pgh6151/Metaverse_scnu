@@ -94,8 +94,6 @@ GameObject:
   - component: {fileID: 6220252633938786773}
   - component: {fileID: 5759885797121225954}
   - component: {fileID: 564118194096119339}
-  - component: {fileID: 5866495328990349287}
-  - component: {fileID: 7296567171910005052}
   m_Layer: 0
   m_Name: rock
   m_TagString: Untagged
@@ -144,42 +142,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.2640414, y: 3.1579247, z: 0.9392595}
   m_Center: {x: -1.2517312, y: 1.0789623, z: 0.030370235}
---- !u!114 &5866495328990349287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6708417845697160047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 7296567171910005052}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &7296567171910005052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6708417845697160047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
-  m_UseLocal: 1

@@ -149,6 +149,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
             }else if(SceneManagerHelper.ActiveSceneName == "CinemachineScene")
             {
+                
                 PV.RPC("PlayerSetactiveTrue", RpcTarget.AllBuffered);
 
                 Joystick.SetActive(true);

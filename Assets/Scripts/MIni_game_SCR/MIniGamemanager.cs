@@ -124,7 +124,7 @@ public class MIniGamemanager : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1f);
-            PhotonNetwork.Instantiate("rock", RanSpawner, gameObject.transform.rotation);
+            Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
         }
     }
 

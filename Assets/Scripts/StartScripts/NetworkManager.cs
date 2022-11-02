@@ -87,7 +87,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Update() 
     {
         
-
         if(Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected) PhotonNetwork.Disconnect();
 
 
@@ -140,8 +139,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         PhotonNetwork.LeaveRoom();
         Destroy(gameObject);
-
-        SceneManager.LoadScene(0);
         print("연결끊김");
        
     }
@@ -165,7 +162,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public override void OnLeftRoom()
     {
-        
+        SceneManager.LoadScene(0);
     }
 
     #endregion
@@ -177,6 +174,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         CoroutineHandler.Instance.StartCoroutine(SceneSync("Minigame1"));
     }
+
+    
     
     // Photon Networking 유튜브 영상 출처
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -207,11 +206,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("ARScene");
         
     }
-
-    public void Onclick_ScreenShot()
+    public void ARcam_OFF()
     {
-        ScreenCapture.CaptureScreenshot("SomeLevel.png");
+        SceneManager.LoadScene("CinemachineScene");
     }
+
+    // public void Onclick_ScreenShot()
+    // {
+    //     ScreenCapture.CaptureScreenshot("SomeLevel.png");
+    // }
 
     // public void Sqawn()
     // {   
