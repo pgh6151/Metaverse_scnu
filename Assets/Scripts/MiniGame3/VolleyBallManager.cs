@@ -6,7 +6,7 @@ using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class VolleyBallManager : MonoBehaviour
+public class VolleyBallManager : MonoBehaviour, IPunObservable
 {
     public Team team = Team.Red;
     public bool isCollided;
@@ -275,5 +275,22 @@ public class VolleyBallManager : MonoBehaviour
         }
     }
 
-    
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_isBlueGetPoint); 
+            stream.SendNext(_time);
+            stream.SendNext(bluePoints);
+            stream.SendNext(redPoints);
+        }
+        else
+        {
+            _isBlueGetPoint = (bool)stream.ReceiveNext();
+            _time = (int)stream.ReceiveNext();
+            bluePoints = (int)stream.ReceiveNext();
+            redPoints = (int)stream.ReceiveNext();
+        }
+    }
 }
