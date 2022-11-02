@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    private float CurrentTime;
+    public float CurrentTime;
     public Text TimerText;
 
-    void Start()
+    public void Start()
     {
         CurrentTime = 0;    
     }

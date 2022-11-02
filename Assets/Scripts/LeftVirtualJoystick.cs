@@ -8,8 +8,8 @@ using UnityEngine.EventSystems; // 키보드, 마우스, 터치를 이벤트로 
 public class LeftVirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField]
-    private RectTransform lever;
-    private RectTransform joystick;
+    public RectTransform lever;
+    public RectTransform joystick;
     [SerializeField] private float boostTimer = 0f;
 
     [SerializeField, Range(10, 200)]
@@ -17,7 +17,6 @@ public class LeftVirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandle
 
     private Vector2 inputDirection;
     private bool isInput;
-
     [SerializeField] //TPS 사용
     private TPSCharacterController controller;
 
