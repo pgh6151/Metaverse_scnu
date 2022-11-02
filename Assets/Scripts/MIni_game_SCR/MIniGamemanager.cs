@@ -45,10 +45,11 @@ public class MIniGamemanager : MonoBehaviour
         
         ST = false;
         RST = false;
+        
+        startBtn.SetActive(true);
 
         if (PhotonNetwork.IsMasterClient)
-        {
-            startBtn.SetActive(true);
+        {    
             exitBtn.SetActive(true);
         }
     }

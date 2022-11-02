@@ -38,7 +38,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Awake() 
     {
         
-        
         DontDestroyOnLoad(gameObject);
         
         //화면비율과 가로고정
@@ -58,7 +57,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     }
 
-    // Photon Networking 유튜브 영상 출처
+    // // Photon Networking 유튜브 영상 출처
     // private void GetCurrentRoomPlayers()
     // {
     //     if(!PhotonNetwork.IsConnected)
@@ -72,7 +71,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //     }
     // }
 
-    // Photon Networking 유튜브 영상 출처
+    // // Photon Networking 유튜브 영상 출처
 
     // private void AddPlayerListing(Player player)
     // {
@@ -82,10 +81,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //         listing.SetPlayerInfo(player);
     //         _listings.Add(listing);
     //     }
+        
     // }
 
     private void Update() 
     {
+        
+
         if(Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected) PhotonNetwork.Disconnect();
 
 
@@ -204,6 +206,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         SceneManager.LoadScene("ARScene");
         
+    }
+
+    public void Onclick_ScreenShot()
+    {
+        ScreenCapture.CaptureScreenshot("SomeLevel.png");
     }
 
     // public void Sqawn()

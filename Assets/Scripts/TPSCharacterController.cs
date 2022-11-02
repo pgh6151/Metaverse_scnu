@@ -84,22 +84,50 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
+        
+
         OnLevelWasLoaded(SceneManagerHelper.ActiveSceneBuildIndex);
         animator = characterBody.GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
     
     }
+    [PunRPC]
+    void PlayerSetactiveTrue()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    // [PunRPC]
+    // void PlayerSetactiveFalse()
+    // {
+    //     gameObject.SetActive(false);
+    // }
     
+
+
     void Update()
     {
-        if(!PV.IsMine && SceneManagerHelper.ActiveSceneName == "Minigame1")
+        if(!PV.IsMine)
         {
-            CurrentPlayer.SetActive(false);
-        }else if (!PV.IsMine && SceneManagerHelper.ActiveSceneName == "CinemachineScene")
-        {
-            print("다른클라");
-            CurrentPlayer.SetActive(true);
+            if(SceneManagerHelper.ActiveSceneName == "Minigame1")
+            {
+                gameObject.SetActive(false);
+            }
         }
+
+        // if(PV.ViewID == 1001 && SceneManagerHelper.ActiveSceneName == "CinemachineScene")
+        // {
+        //     GameObject [] PlayerGameObject = GameObject.FindGameObjectsWithTag("Player");
+        //     for(int i = 0 ; i <= PlayerGameObject.Length; i ++)
+        //     {
+        //         PV.gameObject.SetActive(true);
+        //         if(PlayerGameObject[i] != null)
+        //         {
+        //             PlayerGameObject[i].SetActive(true);
+        //         }
+        //     }
+        // }
+
 
         //ismine 일때만 구동해서 네트워크 제어
         if(PV.IsMine)
@@ -121,11 +149,21 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
 
             }else if(SceneManagerHelper.ActiveSceneName == "CinemachineScene")
             {
+                PV.RPC("PlayerSetactiveTrue", RpcTarget.AllBuffered);
+
                 Joystick.SetActive(true);
                 RotationCanv.SetActive(true);
                 EmotionCanv.SetActive(true);
                 Cam.SetActive(true);
             }
+            else if(SceneManagerHelper.ActiveSceneName == "ARScene")
+            {
+                Joystick.SetActive(false);
+                RotationCanv.SetActive(false);
+                EmotionCanv.SetActive(false);
+                Cam.SetActive(false);
+            }
+
 
         }
         else if ((transform.position - curPos).sqrMagnitude >= 100)transform.position = curPos; //너무 멀어졌을 때 부드러운 위치 동기화
@@ -135,11 +173,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             transform.rotation = Quaternion.Slerp(transform.rotation, curRot, Time.deltaTime * 10);
         }
 
-        if(SceneManagerHelper.ActiveSceneName == "ARScene")
-        {
-            Cam.SetActive(false);
-        }
-
+        
 
         
     }
