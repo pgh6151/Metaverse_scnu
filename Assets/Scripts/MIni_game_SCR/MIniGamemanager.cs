@@ -94,7 +94,8 @@ public class MIniGamemanager : MonoBehaviour
     public void ExitBtn()
     {
         if (PhotonNetwork.IsMasterClient)
-            NetworkManager.Instance.SceneSync("CinemachineScene");
+            Debug.Log("aa");
+        StartCoroutine(NetworkManager.Instance.SceneSync("CinemachineScene"));
     }
 
 
