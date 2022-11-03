@@ -10508,7 +10508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004efaef1076ca74c94e7a156a1a6245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ground: 1
+  ground: 2
 --- !u!1001 &448446344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25823,7 +25823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004efaef1076ca74c94e7a156a1a6245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ground: 0
+  ground: 1
 --- !u!4 &1123989549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4161451654569526, guid: 60f00f9b917704995bf06e2fd3c2c543, type: 3}
