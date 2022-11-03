@@ -30,15 +30,18 @@ public class VolleyBall : MonoBehaviourPunCallbacks, IPunObservable
         switch (collision.collider.tag)
         {
             case "Player":
-                Transform camTrans = collision.collider.GetComponentInChildren<Camera>().transform;
-                Vector3 direction = camTrans.forward + Vector3.up * verticalPower;
-                _rigidbody.AddForce(direction * power, ForceMode.Impulse);
-                
-                _team = collision.collider.GetComponent<VolleyBallPlayer>().GetTeam();
-                if (_previousTeam.Equals(_team))
-                    _volleyBallManager.IncreaseTouchCount(_team);
-                _previousTeam = _team;
-                _isPassedSky = false;
+                if (photonView.IsMine)
+                {
+                    Transform camTrans = collision.collider.GetComponentInChildren<Camera>().transform;
+                    Vector3 direction = camTrans.forward + Vector3.up * verticalPower;
+                    _rigidbody.AddForce(direction * power, ForceMode.Impulse);
+                    
+                    _team = collision.collider.GetComponent<VolleyBallPlayer>().GetTeam();
+                    if (_previousTeam.Equals(_team))
+                        _volleyBallManager.IncreaseTouchCount(_team);
+                    _previousTeam = _team;
+                    _isPassedSky = false;
+                }
                 break;
             // 바깥 부분 땅
             case "Ground":
