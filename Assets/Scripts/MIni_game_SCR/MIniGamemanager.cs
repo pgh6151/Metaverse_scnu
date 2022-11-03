@@ -130,8 +130,7 @@ public class MIniGamemanager : MonoBehaviour
 
     public void RockTrigger()
     {
-        if (PhotonNetwork.IsMasterClient)
-            ReStartCanv.SetActive(true);
+        ReStartCanv.SetActive(true);
         ST = false;
     }
     
