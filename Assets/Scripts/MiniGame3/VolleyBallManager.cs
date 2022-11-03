@@ -63,7 +63,7 @@ public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             redParticles.Add(go.GetComponent<ParticleSystem>());
         }
-        photonView.RPC("ResetRound", RpcTarget.All, _isBlueGetPoint);
+        photonView.RPC("ResetRound", RpcTarget.AllBuffered, _isBlueGetPoint);
     }
 
     public void OutScore(Team team)
@@ -95,7 +95,7 @@ public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        photonView.RPC("ResetRound", RpcTarget.All, _isBlueGetPoint);
+        photonView.RPC("ResetRound", RpcTarget.AllBuffered, _isBlueGetPoint);
     }
 
     IEnumerator BlueWIn()
@@ -221,7 +221,7 @@ public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
-        photonView.RPC("ResetRound", RpcTarget.All, _isBlueGetPoint);
+        photonView.RPC("ResetRound", RpcTarget.AllBuffered, _isBlueGetPoint);
     }
 
     [PunRPC]
@@ -274,7 +274,7 @@ public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
                 _isBlueGetPoint = true;
                 isCollided = true;
             }
-            photonView.RPC("ResetRound", RpcTarget.All, _isBlueGetPoint);
+            photonView.RPC("ResetRound", RpcTarget.AllBuffered, _isBlueGetPoint);
         }
     }
 
