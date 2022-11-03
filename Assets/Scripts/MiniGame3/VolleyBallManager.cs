@@ -6,7 +6,7 @@ using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class VolleyBallManager : MonoBehaviour, IPunObservable
+public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Team team = Team.Red;
     public bool isCollided;
@@ -63,7 +63,7 @@ public class VolleyBallManager : MonoBehaviour, IPunObservable
         {
             redParticles.Add(go.GetComponent<ParticleSystem>());
         }
-        ResetRound(_isBlueGetPoint);
+        photonView.RPC("ResetRound", RpcTarget.All, _isBlueGetPoint);
     }
 
     public void OutScore(Team team)
@@ -95,7 +95,7 @@ public class VolleyBallManager : MonoBehaviour, IPunObservable
             }
         }
 
-        ResetRound(_isBlueGetPoint);
+        photonView.RPC("ResetRound", RpcTarget.All, _isBlueGetPoint);
     }
 
     IEnumerator BlueWIn()
@@ -221,10 +221,10 @@ public class VolleyBallManager : MonoBehaviour, IPunObservable
                 }
             }
         }
-
-        ResetRound(_isBlueGetPoint);
+        photonView.RPC("ResetRound", RpcTarget.All, _isBlueGetPoint);
     }
 
+    [PunRPC]
     void ResetRound(bool isBlueGetPoint)
     {
         var ballRigid = _volleyBall.GetComponent<Rigidbody>();
@@ -271,7 +271,7 @@ public class VolleyBallManager : MonoBehaviour, IPunObservable
                 _isBlueGetPoint = true;
                 isCollided = true;
             }
-            ResetRound(_isBlueGetPoint);
+            photonView.RPC("ResetRound", RpcTarget.All, _isBlueGetPoint);
         }
     }
 
@@ -280,14 +280,12 @@ public class VolleyBallManager : MonoBehaviour, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(_isBlueGetPoint); 
             stream.SendNext(_time);
             stream.SendNext(bluePoints);
             stream.SendNext(redPoints);
         }
         else
         {
-            _isBlueGetPoint = (bool)stream.ReceiveNext();
             _time = (int)stream.ReceiveNext();
             bluePoints = (int)stream.ReceiveNext();
             redPoints = (int)stream.ReceiveNext();
