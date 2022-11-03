@@ -52,7 +52,7 @@ public class VolleyBallManager : MonoBehaviour, IPunObservable
         //     PhotonNetwork.Instantiate("Volleyball", Vector3.zero, Quaternion.identity).GetComponent<VolleyBall>();
         _volleyBall = FindObjectOfType<VolleyBall>();
         _score = FindObjectOfType<Score>();
-        _time = 10;
+        _time = 15;
         blueWinTrans = GameObject.Find("BlueWinParticles").transform;
         foreach (Transform go in blueWinTrans)
         {
