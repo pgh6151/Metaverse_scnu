@@ -138,8 +138,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             Cam.SetActive(false);
         }
 
-
-        
     }
     
 

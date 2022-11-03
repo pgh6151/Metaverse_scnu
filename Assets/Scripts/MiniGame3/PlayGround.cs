@@ -12,21 +12,21 @@ namespace MiniGame3
         int _maxPoint = 15;
         bool _cross;
 
-    
-
-        void Update()
-        {
-        
-        }
-
         public Ground GetSide()
         {
             return ground;
         }
 
-    
-
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.tag.Equals("Player"))
+            {
+                other.GetComponent<VolleyBallPlayer>().team = (Team)ground;
+            }
+        }
     }
+    
+    
 
     public enum Ground
     {

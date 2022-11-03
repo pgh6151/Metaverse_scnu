@@ -46,7 +46,7 @@ public class VolleyBall : MonoBehaviourPunCallbacks, IPunObservable
         Vector3 direction = camTrans.forward + Vector3.up * verticalPower;
         _rigidbody.AddForce(direction * power, ForceMode.Impulse);
 
-        _team = collision.collider.GetComponent<VolleyBallPlayer>().GetTeam();
+        _team = collision.collider.GetComponent<VolleyBallPlayer>().team;
         if (_previousTeam.Equals(_team))
             _volleyBallManager.IncreaseTouchCount(_team);
         _previousTeam = _team;
