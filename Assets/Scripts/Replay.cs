@@ -27,8 +27,10 @@ public class Replay : MonoBehaviour
         {
             End.SetActive(false);
             Btn.SetActive(false);
-            SceneManager.LoadScene(sceneName);
             Time.timeScale = 1;
+            //SceneManager.LoadScene(sceneName);
+            Btn.GetComponent<MIniGamemanager>().ExitBtn();
+
         }
     }
 }

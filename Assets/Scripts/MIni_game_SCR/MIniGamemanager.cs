@@ -12,10 +12,12 @@ public class MIniGamemanager : MonoBehaviour
     // 스톱워치
     [SerializeField] float timeStart;
     [SerializeField] Text timeText;
+    [SerializeField] GameObject startBtn;
+    [SerializeField] GameObject exitBtn;
 
     bool timeActive = false;
 
-    
+
     public GameObject StartCanv;
     public GameObject ReStartCanv;
 
@@ -27,22 +29,29 @@ public class MIniGamemanager : MonoBehaviour
     //공용변수 
     public bool ST;
     public bool RST;
-    public Vector3 MoveVec = new Vector3 (0,0,0);
+    public Vector3 MoveVec = new Vector3(0, 0, 0);
 
 
-    private void Awake() 
+    private void Awake()
     {
-        
+
 
     }
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {
         timeText.text = timeStart.ToString("F2");
-    
+
         ST = false;
         RST = false;
+
+        startBtn.SetActive(true);
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            exitBtn.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -52,24 +61,24 @@ public class MIniGamemanager : MonoBehaviour
         timeActive = ST;
         StartTime();
 
-        
+
         RanSpawner = new Vector3(Random.Range(-7, 4), 1.18f, 44.93f);
 
-        if(ST && routineControll == 1)
+        if (ST && routineControll == 1)
         {
             StartCoroutine("InstRock");
             routineControll--;
-        }else if (ST == false)
+        }
+        else if (ST == false)
         {
             StopCoroutine("InstRock");
             routineControll = 1;
         }
-        
+
     }
 
     public void ST_BTN()
     {
-
         timeStart = 0f;
         StartCanv.SetActive(false);
         Debug.Log("작동");
@@ -82,43 +91,49 @@ public class MIniGamemanager : MonoBehaviour
         ReStartCanv.SetActive(false);
     }
 
-    public void Exit_BTN()
+    public void ExitBtn()
     {
-        SceneManager.LoadScene("CinemachineScene");
+        if (PhotonNetwork.IsMasterClient)
+            NetworkManager.Instance.SceneSync("CinemachineScene");
     }
 
+
+    [PunRPC]
     public void StartTime()
     {
-        if(timeActive)
+        if (timeActive)
         {
             timeStart += Time.deltaTime;
             timeText.text = timeStart.ToString("F2");
         }
-        
-    }   
+
+    }
     public void leftBtn()
     {
         Debug.Log("왼쪽");
-        MoveVec = new Vector3(-1,0,0);
+        MoveVec = new Vector3(-1, 0, 0);
     }
-    
+
     public void rightBtn()
     {
         Debug.Log("오른쪽");
-        MoveVec = new Vector3(1,0,0);
+        MoveVec = new Vector3(1, 0, 0);
 
     }
 
     IEnumerator InstRock()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(1f);
             Instantiate(Rock, RanSpawner, gameObject.transform.rotation);
-            
         }
-        
     }
 
-    
+    public void RockTrigger()
+    {
+        ReStartCanv.SetActive(true);
+        ST = false;
+    }
+
 }

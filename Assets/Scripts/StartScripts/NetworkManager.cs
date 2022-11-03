@@ -8,56 +8,70 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    
+    static NetworkManager _instance;
+
+    public static NetworkManager Instance
+    {
+        get
+        {
+            if (!_instance)
+            {
+                GameObject go = new GameObject("NetworkManager");
+                _instance = go.AddComponent<NetworkManager>();
+            }
+
+            return _instance;
+        }
+    }
+
     [SerializeField] Text StatusText;
     [SerializeField] InputField NickNameInput;
-    
+
     Scene scene;
 
     // Photon Networking 유튜브 영상 출처 (이거아님)
     private List<PlayerListing> _listings = new List<PlayerListing>();
     private PlayerListing _playerListing;
-    
-    
+
+
     #region
-    private void Awake() 
+    private void Awake()
     {
-        
-        
+
         DontDestroyOnLoad(gameObject);
-        
+
         //화면비율과 가로고정
         Screen.SetResolution(3200, 1440, true);
         Screen.autorotateToLandscapeLeft = true;
         Screen.autorotateToLandscapeRight = true;
         Screen.autorotateToPortrait = false;
         Screen.autorotateToPortraitUpsideDown = false;
-        
+
         //씬 자동동기화, 핑조절
         PhotonNetwork.SendRate = 60;
         PhotonNetwork.SerializationRate = 30;
         PhotonNetwork.AutomaticallySyncScene = true;
-        
+
         scene = SceneManager.GetActiveScene();
 
 
     }
 
-    // Photon Networking 유튜브 영상 출처
+    // // Photon Networking 유튜브 영상 출처
     // private void GetCurrentRoomPlayers()
     // {
     //     if(!PhotonNetwork.IsConnected)
     //         return;
     //     if(PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null)
     //         return;
-        
+
     //     foreach(KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
     //     {
     //         AddPlayerListing(playerInfo.Value);
     //     }
     // }
 
-    // Photon Networking 유튜브 영상 출처
+    // // Photon Networking 유튜브 영상 출처
 
     // private void AddPlayerListing(Player player)
     // {
@@ -67,22 +81,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //         listing.SetPlayerInfo(player);
     //         _listings.Add(listing);
     //     }
+
     // }
 
-    private void Update() 
+    private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected) PhotonNetwork.Disconnect();
+
+        if (Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected) PhotonNetwork.Disconnect();
 
 
-        if(scene.name == "StartScene")
+        if (scene.name == "StartScene")
         {
             StatusText.text = PhotonNetwork.NetworkClientState.ToString();
         }
-        
 
-    } 
 
-    public  void Connect() => PhotonNetwork.ConnectUsingSettings();
+    }
+
+    public void Connect() => PhotonNetwork.ConnectUsingSettings();
 
     // OnConnectedToMaster
     // PhotonNetwork.autoJoinLobby 이 false인 경우에만 마스터 서버에 연결되고 인증 후에 호출
@@ -96,15 +112,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         // PhotonNetwork.JoinLobby();
         //씬넘기기
-        
+
+        PhotonNetwork.JoinOrCreateRoom("schoolRoom", new RoomOptions { MaxPlayers = 10 }, null);
         PhotonNetwork.LoadLevel("CinemachineScene");
-        PhotonNetwork.JoinOrCreateRoom("schoolRoom", new RoomOptions {MaxPlayers = 10}, null);
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
 
     }
-    
+
     public override void OnCreatedRoom()
     {
         print("방만들기 성공!");
@@ -118,15 +134,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
 
     // 나가기 버튼 누르면 어플리케이션이 나가지도록
-    public override void OnDisconnected(DisconnectCause cause) 
+    public override void OnDisconnected(DisconnectCause cause)
     {
-        
+
         PhotonNetwork.LeaveRoom();
         Destroy(gameObject);
-
-        SceneManager.LoadScene(0);
         print("연결끊김");
-       
+
     }
 
     public void QuitApp()
@@ -139,7 +153,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //     SceneManager.LoadScene("CinemachineScene");
     //     PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
     // }
-    
+
     public override void OnJoinedRoom()
     {
         //(볼것) 방마다 스폰 새로할수 있도록
@@ -148,23 +162,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public override void OnLeftRoom()
     {
-        
+        SceneManager.LoadScene(0);
     }
 
     #endregion
 
     public void LeaveRoom() => PhotonNetwork.LeaveRoom();
-    
-    // 씬이동시 이거사용 (볼것)
-    public void moveScene_gunha()
-    {  
-        SceneManager.LoadScene(2);
-        
-    }
 
     public void moveScene_seon()
     {
-        SceneManager.LoadScene("MazeScene");
+        Instance.StartCoroutine(SceneSync("MazeScene")); 
+        //SceneManager.LoadScene("MazeScene");
 
     }
 
@@ -172,21 +180,40 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         int index = _listings.FindIndex(x => x.Player == otherPlayer);
-        if( index != -1)
+        if (index != -1)
         {
             Destroy(_listings[index].gameObject);
             _listings.RemoveAt(index);
         }
     }
 
-    
+    public IEnumerator SceneSync(string sceneName)
+    {
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel(sceneName);
+        while (PhotonNetwork.LevelLoadingProgress < 1)
+        {
+            Debug.Log(PhotonNetwork.LevelLoadingProgress);
+            yield return null;
+        }
+        Debug.Log("레벨 로딩이 완료되었습니다.");
+    }
 
 
     public void ARcam_ON()
     {
         SceneManager.LoadScene("ARScene");
-        
+
     }
+    public void ARcam_OFF()
+    {
+        SceneManager.LoadScene("CinemachineScene");
+    }
+
+    // public void Onclick_ScreenShot()
+    // {
+    //     ScreenCapture.CaptureScreenshot("SomeLevel.png");
+    // }
 
     // public void Sqawn()
     // {   
@@ -197,6 +224,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // }
 
 
-    
-    
+
+
 }

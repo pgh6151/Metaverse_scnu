@@ -10043,6 +10043,7 @@ GameObject:
   - component: {fileID: 1671579709}
   - component: {fileID: 1671579708}
   - component: {fileID: 1671579707}
+  - component: {fileID: 1671579710}
   m_Layer: 8
   m_Name: Button
   m_TagString: Replay
@@ -10133,6 +10134,28 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1671579710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671579705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f672638ac4f39e04d9bd513ded3336f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeStart: 0
+  timeText: {fileID: 1845853651}
+  startBtn: {fileID: 0}
+  exitBtn: {fileID: 1901027807}
+  StartCanv: {fileID: 0}
+  ReStartCanv: {fileID: 0}
+  Rock: {fileID: 0}
+  ST: 0
+  RST: 0
+  MoveVec: {x: 0, y: 0, z: 0}
 --- !u!1001 &1680812171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10981,6 +11004,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 979099272382299474, guid: 38ce8f29cac6f7449bd12c481f00255f, type: 3}
   m_PrefabInstance: {fileID: 1834564980}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1845853651 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 590964804383420533, guid: 64581a319c352da44a5a8cf3a16ff52b, type: 3}
+  m_PrefabInstance: {fileID: 2066411306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1848810446
 GameObject:
   m_ObjectHideFlags: 0
@@ -11446,10 +11480,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1744207782}
-        m_TargetAssemblyTypeName: Replay, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+      - m_Target: {fileID: 1671579710}
+        m_TargetAssemblyTypeName: MIniGamemanager, Assembly-CSharp
+        m_MethodName: ExitBtn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
