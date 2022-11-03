@@ -227,17 +227,20 @@ public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void ResetRound(bool isBlueGetPoint)
     {
-        var ballRigid = _volleyBall.GetComponent<Rigidbody>();
-        _score.SetScoreText(redPoints, bluePoints);
-        if (isBlueGetPoint)
-            ballRigid.position = blueBallPos;
-        else
-            ballRigid.position = redBallPos;
-        
-        ballRigid.velocity = Vector3.zero;
-        ballRigid.angularVelocity = Vector3.zero;
-        _touchCount = 0;
-        StartCoroutine(WaitForRound(ballRigid));
+        if (photonView.IsMine)
+        {
+            var ballRigid = _volleyBall.GetComponent<Rigidbody>();
+            _score.SetScoreText(redPoints, bluePoints);
+            if (isBlueGetPoint)
+                ballRigid.position = blueBallPos;
+            else
+                ballRigid.position = redBallPos;
+            
+            ballRigid.velocity = Vector3.zero;
+            ballRigid.angularVelocity = Vector3.zero;
+            _touchCount = 0;
+            StartCoroutine(WaitForRound(ballRigid));
+        }
     }
 
     IEnumerator WaitForRound(Rigidbody ballRigid)
