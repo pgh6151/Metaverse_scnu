@@ -284,14 +284,12 @@ public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(_isBlueGetPoint); 
             stream.SendNext(_time);
             stream.SendNext(bluePoints);
             stream.SendNext(redPoints);
         }
         else
         {
-            _isBlueGetPoint = (bool)stream.ReceiveNext();
             _time = (int)stream.ReceiveNext();
             bluePoints = (int)stream.ReceiveNext();
             redPoints = (int)stream.ReceiveNext();
