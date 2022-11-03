@@ -6,7 +6,7 @@ using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
+public class VolleyBallManager : MonoBehaviour, IPunObservable
 {
     public Team team = Team.Red;
     public bool isCollided;
@@ -221,27 +221,23 @@ public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
-        
-        photonView.RPC(nameof(ResetRound), RpcTarget.All, _isBlueGetPoint);
+
+        ResetRound(_isBlueGetPoint);
     }
 
-    [PunRPC]
     void ResetRound(bool isBlueGetPoint)
     {
-        if (photonView.IsMine)
-        {
-            var ballRigid = _volleyBall.GetComponent<Rigidbody>();
-            _score.SetScoreText(redPoints, bluePoints);
-            if (isBlueGetPoint)
-                ballRigid.position = blueBallPos;
-            else
-                ballRigid.position = redBallPos;
-            
-            ballRigid.velocity = Vector3.zero;
-            ballRigid.angularVelocity = Vector3.zero;
-            _touchCount = 0;
-            StartCoroutine(WaitForRound(ballRigid));
-        }
+        var ballRigid = _volleyBall.GetComponent<Rigidbody>();
+        _score.SetScoreText(redPoints, bluePoints);
+        if (isBlueGetPoint)
+            ballRigid.position = blueBallPos;
+        else
+            ballRigid.position = redBallPos;
+        
+        ballRigid.velocity = Vector3.zero;
+        ballRigid.angularVelocity = Vector3.zero;
+        _touchCount = 0;
+        StartCoroutine(WaitForRound(ballRigid));
     }
 
     IEnumerator WaitForRound(Rigidbody ballRigid)
@@ -284,12 +280,14 @@ public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
+            stream.SendNext(_isBlueGetPoint); 
             stream.SendNext(_time);
             stream.SendNext(bluePoints);
             stream.SendNext(redPoints);
         }
         else
         {
+            _isBlueGetPoint = (bool)stream.ReceiveNext();
             _time = (int)stream.ReceiveNext();
             bluePoints = (int)stream.ReceiveNext();
             redPoints = (int)stream.ReceiveNext();
