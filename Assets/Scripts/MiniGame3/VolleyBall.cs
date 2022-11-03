@@ -30,7 +30,7 @@ public class VolleyBall : MonoBehaviourPunCallbacks, IPunObservable
         switch (collision.collider.tag)
         {
             case "Player":
-                photonView.RPC(nameof(CollisionProcess), RpcTarget.All, collision);
+                CollisionProcess(collision);
                 break;
             // 바깥 부분 땅
             case "Ground":
@@ -40,10 +40,9 @@ public class VolleyBall : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    [PunRPC]
     void CollisionProcess(Collision collision)
     {
-        Transform camTrans = collision.collider.GetComponentInChildren<Camera>().transform;
+        Transform camTrans = collision.collider.transform;
         Vector3 direction = camTrans.forward + Vector3.up * verticalPower;
         _rigidbody.AddForce(direction * power, ForceMode.Impulse);
 
