@@ -6,7 +6,7 @@ using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class VolleyBallManager : MonoBehaviour, IPunObservable
+public class VolleyBallManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Team team = Team.Red;
     public bool isCollided;
@@ -221,10 +221,11 @@ public class VolleyBallManager : MonoBehaviour, IPunObservable
                 }
             }
         }
-
-        ResetRound(_isBlueGetPoint);
+        
+        photonView.RPC(nameof(ResetRound), RpcTarget.All, _isBlueGetPoint);
     }
 
+    [PunRPC]
     void ResetRound(bool isBlueGetPoint)
     {
         var ballRigid = _volleyBall.GetComponent<Rigidbody>();
