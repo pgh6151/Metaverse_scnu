@@ -23,11 +23,15 @@ public class Col : MonoBehaviour
     {
         if (collision.collider.gameObject.CompareTag("Wall"))
         {
-            Char.transform.position = new Vector3(0, 0, 0);
+            Debug.Log("1111");
+            Char.transform.position = new Vector3(0.0f, 0.1f, 0.0f);
+            //transform.position = new Vector3(0.0f, 0.743f, 0.626f);
             ColScreen.SetActive(true);
             Time.timeScale = 0;
 
-            Char.GetComponent<Timer>().CurrentTime = 0;
+            //Char.GetComponent<Timer>().CurrentTime = 0;
+            //Timer.GetComponent<>().CurrentTime = 0;
+            GameObject.Find("Quad").GetComponent<Timer>().CurrentTime = 0;
             Lever.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
             StartCoroutine(Respawn());
         }

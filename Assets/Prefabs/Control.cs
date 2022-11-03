@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class Control : MonoBehaviour
 {
-    private float h = 0.0f;
-    private float v = 0.0f;
-    private float r = 0.0f;
-    private float moveSpeed = 5.0f;
-    private float rotationSpeed = 50.0f;
-    private Transform playerTr;
+    GameObject Char;
+    GameObject QF;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerTr = GetComponent<Transform>();
+        Char = GameObject.Find("Character");
+        QF = GameObject.Find("QuadF");
     }
 
     // Update is called once per frame
     void Update()
     {
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
-        r = Input.GetAxis("Mouse X");
-        Debug.Log("H:" + h.ToString() + "V:" + v.ToString());
-        playerTr.Translate(new Vector3(h, 0, v) * moveSpeed * Time.deltaTime);
-        playerTr.Rotate(new Vector3(0, r, 0) * rotationSpeed * Time.deltaTime);
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+        //QF.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        //        cube.transform.position = new Vector3(h, 0, v));
+        //(float)transform.position = (float)Char.transform.position + new Vector3(0, 0.743, 0.555);
+        //transform.Translate(Char.transform.position.x, Char.transform.position.y+0.743, Char.transform.position.z+0.555);
+        transform.position = new Vector3(Char.transform.position.x + 0.0f,
+                                        Char.transform.position.y + 0.743f,
+                                        Char.transform.position.z + 0.5f);
+        //QF.transform.position = new Vector3(Char.transform.position.x + 0.0f,
+                                        //Char.transform.position.y + 0.743f,
+                                        //Char.transform.position.z + 1.2f);
     }
 }

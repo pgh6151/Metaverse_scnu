@@ -2075,6 +2075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lever: {fileID: 590964804573995150}
+  joystick: {fileID: 0}
   boostTimer: 0
   leverRange: 150
   controller: {fileID: 590964804549884721}

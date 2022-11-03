@@ -161,7 +161,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene(2);
         
     }
-    
+
+    public void moveScene_seon()
+    {
+        SceneManager.LoadScene("MazeScene");
+
+    }
+
     // Photon Networking 유튜브 영상 출처
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
