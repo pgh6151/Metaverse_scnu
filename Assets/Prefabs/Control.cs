@@ -10,7 +10,7 @@ public class Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Char = GameObject.Find("Character");
+        Char = GameObject.Find("Player(Clone)");
         QF = GameObject.Find("QuadF");
     }
 

@@ -8,7 +8,7 @@ public class Replay : MonoBehaviour
 {
     public void LoadScene(string sceneName)
     {
-        GameObject Char = GameObject.Find("Character");
+        GameObject Char = GameObject.Find("Player(Clone)");
         GameObject End = GameObject.Find("Arrival");
         GameObject Btn = GameObject.Find("Button");
 

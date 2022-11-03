@@ -13,7 +13,7 @@ public class Col : MonoBehaviour
     void Start() {
         state = false;
         
-        Char = GameObject.Find("Character");
+        Char = GameObject.Find("Player(Clone)");
         Lever = GameObject.Find("Lever");
     }
 
