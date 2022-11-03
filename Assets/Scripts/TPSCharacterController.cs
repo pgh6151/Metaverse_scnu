@@ -22,6 +22,9 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject RotationCanv; // 회전 canvas
     [SerializeField] private GameObject EmotionCanv; // 감정표현 canvas
     [SerializeField] private GameObject CurrentPlayer;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private GameObject VoiceOnBtn;
+    [SerializeField] private GameObject VoiceOffBtn;
 
     public static GameObject LocalPlayerInstance;
     Animator animator;
@@ -278,6 +281,18 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             curRot = (Quaternion)stream.ReceiveNext();
 
         }
+    }
+    public void VoiceON()
+    {
+        audioSource.volume = 1;
+        VoiceOnBtn.SetActive(false);
+        VoiceOffBtn.SetActive(true);
+    }
+    public void VoiceOFF()
+    {
+        audioSource.volume = 0;
+        VoiceOnBtn.SetActive(true);
+        VoiceOffBtn.SetActive(false);
     }
 
     public void SayHiButton()
