@@ -1,10 +1,11 @@
 using System;
 using ExitGames.Client.Photon.StructWrapping;
 using MiniGame3;
+using Photon.Pun;
 using UnityEngine;
 
 
-public class VolleyBall : MonoBehaviour
+public class VolleyBall : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] private float power = 5f;
     [SerializeField] float verticalPower = 3f;
@@ -29,15 +30,7 @@ public class VolleyBall : MonoBehaviour
         switch (collision.collider.tag)
         {
             case "Player":
-                Transform camTrans = collision.collider.GetComponentInChildren<Camera>().transform;
-                Vector3 direction = camTrans.forward + Vector3.up * verticalPower;
-                _rigidbody.AddForce(direction * power, ForceMode.Impulse);
-                
-                _team = collision.collider.GetComponent<VolleyBallPlayer>().GetTeam();
-                if (_previousTeam.Equals(_team))
-                    _volleyBallManager.IncreaseTouchCount(_team);
-                _previousTeam = _team;
-                _isPassedSky = false;
+                CollisionProcess(collision);
                 break;
             // 바깥 부분 땅
             case "Ground":
@@ -45,6 +38,19 @@ public class VolleyBall : MonoBehaviour
                 _volleyBallManager.isCollided = true;
                 break;
         }
+    }
+
+    void CollisionProcess(Collision collision)
+    {
+        Transform camTrans = collision.collider.transform;
+        Vector3 direction = camTrans.forward + Vector3.up * verticalPower;
+        _rigidbody.AddForce(direction * power, ForceMode.Impulse);
+
+        _team = collision.collider.GetComponent<VolleyBallPlayer>().team;
+        if (_previousTeam.Equals(_team))
+            _volleyBallManager.IncreaseTouchCount(_team);
+        _previousTeam = _team;
+        _isPassedSky = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -62,6 +68,22 @@ public class VolleyBall : MonoBehaviour
             case "Sky":
                 _isPassedSky = true;
                 break;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_rigidbody.position);
+            stream.SendNext(_rigidbody.rotation);
+            stream.SendNext(_rigidbody.velocity);
+        }
+        else
+        {
+            _rigidbody.position = (Vector3)stream.ReceiveNext();
+            _rigidbody.rotation = (Quaternion)stream.ReceiveNext();
+            _rigidbody.velocity = (Vector3)stream.ReceiveNext();
         }
     }
 }

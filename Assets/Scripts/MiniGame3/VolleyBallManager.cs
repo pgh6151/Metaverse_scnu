@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Mapbox.Unity.Utilities;
 using MiniGame3;
+using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class VolleyBallManager : MonoBehaviour
+public class VolleyBallManager : MonoBehaviour, IPunObservable
 {
     public Team team = Team.Red;
     public bool isCollided;
@@ -21,17 +22,17 @@ public class VolleyBallManager : MonoBehaviour
     [SerializeField] Transform blueWinTrans;
     [SerializeField] Transform redWinTrans;
 
-    VolleyBall _volleyBall;
     Score _score;
     List<ParticleSystem> blueParticles = new List<ParticleSystem>();
     List<ParticleSystem> redParticles = new List<ParticleSystem>();
 
-    private static VolleyBallManager _instance;
+    VolleyBall _volleyBall;
+    static VolleyBallManager _instance;
     public static VolleyBallManager Instance
     {
         get
         {
-            if (_instance == null)
+            if (!_instance)
             {
                 GameObject go = new GameObject("@VolleyBallManager");
                 _instance = go.AddComponent<VolleyBallManager>();
@@ -46,16 +47,12 @@ public class VolleyBallManager : MonoBehaviour
 
     void Init()
     {
-        var objs = FindObjectsOfType<VolleyBallManager>();
-        if (objs.Length != 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
+        _instance = this;
+        // if (PhotonNetwork.IsMasterClient)
+        //     PhotonNetwork.Instantiate("Volleyball", Vector3.zero, Quaternion.identity).GetComponent<VolleyBall>();
         _volleyBall = FindObjectOfType<VolleyBall>();
         _score = FindObjectOfType<Score>();
-        _time = _timer;
+        _time = 15;
         blueWinTrans = GameObject.Find("BlueWinParticles").transform;
         foreach (Transform go in blueWinTrans)
         {
@@ -230,13 +227,13 @@ public class VolleyBallManager : MonoBehaviour
 
     void ResetRound(bool isBlueGetPoint)
     {
+        var ballRigid = _volleyBall.GetComponent<Rigidbody>();
         _score.SetScoreText(redPoints, bluePoints);
         if (isBlueGetPoint)
-            _volleyBall.transform.position = blueBallPos;
+            ballRigid.position = blueBallPos;
         else
-            _volleyBall.transform.position = redBallPos;
+            ballRigid.position = redBallPos;
         
-        var ballRigid = _volleyBall.GetComponent<Rigidbody>();
         ballRigid.velocity = Vector3.zero;
         ballRigid.angularVelocity = Vector3.zero;
         _touchCount = 0;
@@ -275,6 +272,25 @@ public class VolleyBallManager : MonoBehaviour
                 isCollided = true;
             }
             ResetRound(_isBlueGetPoint);
+        }
+    }
+
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_isBlueGetPoint); 
+            stream.SendNext(_time);
+            stream.SendNext(bluePoints);
+            stream.SendNext(redPoints);
+        }
+        else
+        {
+            _isBlueGetPoint = (bool)stream.ReceiveNext();
+            _time = (int)stream.ReceiveNext();
+            bluePoints = (int)stream.ReceiveNext();
+            redPoints = (int)stream.ReceiveNext();
         }
     }
 }

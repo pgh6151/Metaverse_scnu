@@ -96,7 +96,6 @@ public class MIniGamemanager : MonoBehaviour
             CoroutineHandler.Instance.StartCoroutine(NetworkManager.Instance.SceneSync("CinemachineScene"));
     }
 
-    [PunRPC]
     public void StartTime()
     {
         if(timeActive)
