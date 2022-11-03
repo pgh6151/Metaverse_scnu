@@ -30,6 +30,7 @@ namespace MiniGame3
 
     public enum Ground
     {
+        None,
         Red,
         Blue,
         OutSide,
@@ -37,6 +38,7 @@ namespace MiniGame3
 
     public enum Team
     {
+        None,
         Red,
         Blue
     }
