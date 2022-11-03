@@ -227,13 +227,13 @@ public class VolleyBallManager : MonoBehaviour, IPunObservable
 
     void ResetRound(bool isBlueGetPoint)
     {
+        var ballRigid = _volleyBall.GetComponent<Rigidbody>();
         _score.SetScoreText(redPoints, bluePoints);
         if (isBlueGetPoint)
-            _volleyBall.transform.position = blueBallPos;
+            ballRigid.position = blueBallPos;
         else
-            _volleyBall.transform.position = redBallPos;
+            ballRigid.position = redBallPos;
         
-        var ballRigid = _volleyBall.GetComponent<Rigidbody>();
         ballRigid.velocity = Vector3.zero;
         ballRigid.angularVelocity = Vector3.zero;
         _touchCount = 0;
