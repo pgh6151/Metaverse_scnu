@@ -175,11 +175,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         CoroutineHandler.Instance.StartCoroutine(SceneSync("Minigame1"));
     }
 
-    
-    
     public void moveScene_juchan()
     {
         CoroutineHandler.Instance.StartCoroutine(SceneSync("DemoScene"));
+    }
+    public void moveScene_hyeSeon()
+    {
+        CoroutineHandler.Instance.StartCoroutine(SceneSync("MazeScene"));
     }
 
     public void BackToLobby()
