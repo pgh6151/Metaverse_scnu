@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MazeScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MazeScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MIni_game_SCR/MIniGamemanager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MIni_game_SCR/MIniGamemanager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StartScripts/NetworkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StartScripts/NetworkManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +120,7 @@
       <workItem from="1667263411979" duration="1286000" />
       <workItem from="1667381677946" duration="2038000" />
       <workItem from="1667433909405" duration="10403000" />
+      <workItem from="1667523487213" duration="1194000" />
     </task>
     <servers />
   </component>

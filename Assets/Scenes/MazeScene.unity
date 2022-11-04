@@ -11444,7 +11444,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1671579710}
         m_TargetAssemblyTypeName: MIniGamemanager, Assembly-CSharp
-        m_MethodName: ExitBtn
+        m_MethodName: Exit_BTN
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
