@@ -4,7 +4,80 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="" />
+    <list default="true" id="16c11d0e-e15c-4d1b-b210-b5ead114140a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Metaverse_scnu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/(Clone).prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/(Clone).prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CM FreeLook1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CM FreeLook1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Canvas.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Canvas.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Character(Clone).prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Character(Clone).prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Character.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Character.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Col.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Col.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Control.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Control.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Dummy.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Dummy.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/End.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/End.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Ending.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Ending.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Follow.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Follow.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Joystick.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Joystick.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Joystick.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Joystick.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Lever.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Lever.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Lever2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Lever2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Look.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Look.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Materials/dirt.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Materials/dirt.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Materials/grass.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Materials/grass.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Materials/ground.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Materials/ground.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Maze.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Maze.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RotateField.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RotateField.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Timer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Timer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/character.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/character.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/dirt.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/dirt.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/gameEnd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/gameEnd.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/gameEnd2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/gameEnd2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/gameEnd3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/gameEnd3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/grass.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/grass.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/grass1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/grass1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ground.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ground.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/right-arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/right-arrow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/signal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/signal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CinemachineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CinemachineScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +89,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MiniGame3/Score.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MiniGame3/VolleyBall.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MiniGame3/VolleyBallManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UnityProjects/ContinuousProject/Assets/JsonManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3b033083c4da43e891eb67dbd8c7fe3d44800/c3/9b4e0a88/IPointerDownHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c4094ec9f20d4e6cb51937772ba9fb623a00/49/cb18bd77/NativeInputSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f1212ad1dec44ce7b7147976b91869c3157800/3d/fdce5863/RectTransform.cs" root0="SKIP_HIGHLIGHTING" />
@@ -113,6 +187,9 @@
       <workItem from="1667381677946" duration="2038000" />
       <workItem from="1667433909405" duration="10403000" />
       <workItem from="1667523487213" duration="1431000" />
+      <workItem from="1667779757695" duration="339000" />
+      <workItem from="1667786961710" duration="838000" />
+      <workItem from="1667789538110" duration="12356000" />
     </task>
     <servers />
   </component>
