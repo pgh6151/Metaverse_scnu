@@ -95,11 +95,11 @@ public class MIniGamemanager : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
             CoroutineHandler.Instance.StartCoroutine(NetworkManager.Instance.SceneSync("CinemachineScene"));
     }
-    public void ExitBtn()
+    /*public void ExitBtn()
     {
         if (PhotonNetwork.IsMasterClient)
             StartCoroutine(NetworkManager.Instance.SceneSync("CinemachineScene"));
-    }
+    }*/
 
     public void StartTime()
     {

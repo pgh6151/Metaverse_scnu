@@ -157,7 +157,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         //(볼것) 방마다 스폰 새로할수 있도록
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        Vector3 spawnPos = Random.insideUnitSphere * 2f;
+        spawnPos.y = 0;
+        PhotonNetwork.Instantiate("Player", spawnPos, Quaternion.identity);
 
     }
     public override void OnLeftRoom()
