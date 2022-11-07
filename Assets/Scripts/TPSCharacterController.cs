@@ -259,7 +259,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         // transform.rotation = Quaternion.Euler(transform.rotation.x,  transform.rotation.y + inputDirection.x * rotateSpeed, transform.rotation.z);
         rotationX -= inputDirection.y;
         transform.Rotate(Vector3.up * inputDirection.x * rotateSpeed);
-        float tempRotation = Mathf.Clamp(rotationX, -90f, 90f);
+        float tempRotation = Mathf.Clamp(rotationX, -30f, 90f);
         moveCamera.localRotation = Quaternion.Euler(tempRotation * rotateSpeed, 0f, 0f);
         
     }
