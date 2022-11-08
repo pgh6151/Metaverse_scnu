@@ -28,10 +28,13 @@ public class TextInfos
 
 public class BuildingInfo : MonoBehaviour
 {
+    [SerializeField] GameObject interactPanel;
+    [SerializeField] GameObject mainPanel;
     [SerializeField] GameObject infoPanel;
     [SerializeField] Text infoText;
     [SerializeField] Text nameText;
     [SerializeField] Image infoImage;
+    
     Dictionary<string, TextInfo> _dict = new Dictionary<string, TextInfo>();
 
     void Start()
@@ -47,7 +50,9 @@ public class BuildingInfo : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            infoPanel.SetActive(true);
+            interactPanel.SetActive(true);
+            mainPanel.SetActive(true);
+            infoPanel.SetActive(false);
             infoText.text = _dict[name].info;
             nameText.text = $"{name} : {_dict[name].name}";
             infoImage.sprite = Resources.Load<Sprite>($"Texture/Buildings/{name}");
