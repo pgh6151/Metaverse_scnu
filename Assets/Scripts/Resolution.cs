@@ -8,6 +8,11 @@ public class Resolution : MonoBehaviour
 {
     void Awake()
     {
+        CameraResolution();
+    }
+
+    public void CameraResolution()
+    {
         Camera camera = GetComponent<Camera>();
         Rect rect = camera.rect;
         float scaleHeight = ((float)Screen.width / Screen.height) / ((float)20 / 9);
@@ -24,11 +29,6 @@ public class Resolution : MonoBehaviour
         }
 
         camera.rect = rect;
-    }
-
-    void OnPreCull()
-    {
-        GL.Clear(true, true, Color.black);
     }
     /*//Default 해상도 비율
     float fixedAspectRatio = 9f / 16f;

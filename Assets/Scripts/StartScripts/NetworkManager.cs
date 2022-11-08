@@ -206,6 +206,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.LoadLevel(sceneName);
+        
         while (PhotonNetwork.LevelLoadingProgress < 1)
         {
             Debug.Log(PhotonNetwork.LevelLoadingProgress);
