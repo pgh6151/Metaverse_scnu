@@ -118,20 +118,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        // if(PV.ViewID == 1001 && SceneManagerHelper.ActiveSceneName == "CinemachineScene")
-        // {
-        //     GameObject [] PlayerGameObject = GameObject.FindGameObjectsWithTag("Player");
-        //     for(int i = 0 ; i <= PlayerGameObject.Length; i ++)
-        //     {
-        //         PV.gameObject.SetActive(true);
-        //         if(PlayerGameObject[i] != null)
-        //         {
-        //             PlayerGameObject[i].SetActive(true);
-        //         }
-        //     }
-        // }
-
-
+       
         //ismine 일때만 구동해서 네트워크 제어
         if(PV.IsMine)
         {
@@ -210,18 +197,7 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
         // animator.SetBool("IsWalking", IsWalking);
         if (IsWalking)
         {
-            /*// 앞뒤이동. y = 0f이라 up/down 고정
-            Vector3 lookForward = new Vector3(characterBody.forward.x, 0f, characterBody.forward.z).normalized;
-            // 좌우이동. y = 0f이라 up/down 고정
-            Vector3 lookRight = new Vector3(characterBody.right.x, 0, characterBody.right.z).normalized;
-            // 이동 방향 결정*/
-            // Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
-            
-            // 이동 시 정면 바라보기
-            // characterBody.forward = lookForward;
-            // 이동
-            // transform.Translate();
-            //transform.position += moveDir * Time.deltaTime * 5f;
+
             
             // 주찬 수정 => transform 이동은 벽을 뚫는 버그가 많아서 rigidbody.velocity 이동으로 바꿨다.
             // 속도 값 받아옴 (mouse input을 통해)
@@ -237,25 +213,6 @@ public class TPSCharacterController : MonoBehaviourPunCallbacks, IPunObservable
     
     public void Rotate(Vector3 inputDirection)
     {
-        /*//이동 값
-        Vector2 moveDelta = inputDirection;
-        // 카메라의 원래 각도를 오일러 각으로 저장
-        Vector3 camAngle = moveCamera.rotation.eulerAngles;
-        // 카메라의 회전 값 계산
-        float x = camAngle.x - moveDelta.y;
-
-        // 카메라 회전 값을 제한
-        if (x < 180f)
-        {
-            x = Mathf.Clamp(x, -1f, 20f);
-        }
-        else
-        {
-            x = Mathf.Clamp(x, 335f, 390f);
-        }
-        
-        // moveCamera 회전 시키기. Euler로 변환
-        moveCamera.rotation = Quaternion.Euler(x, camAngle.y + moveDelta.x, camAngle.z);*/
         // transform.rotation = Quaternion.Euler(transform.rotation.x,  transform.rotation.y + inputDirection.x * rotateSpeed, transform.rotation.z);
         rotationX -= inputDirection.y;
         transform.Rotate(Vector3.up * inputDirection.x * rotateSpeed);

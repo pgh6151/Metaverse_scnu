@@ -57,32 +57,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     }
 
-    // // Photon Networking 유튜브 영상 출처
-    // private void GetCurrentRoomPlayers()
-    // {
-    //     if(!PhotonNetwork.IsConnected)
-    //         return;
-    //     if(PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null)
-    //         return;
-        
-    //     foreach(KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
-    //     {
-    //         AddPlayerListing(playerInfo.Value);
-    //     }
-    // }
-
-    // // Photon Networking 유튜브 영상 출처
-
-    // private void AddPlayerListing(Player player)
-    // {
-    //     PlayerListing listing = Instantiate(_playerListing);
-    //     if(listing != null)
-    //     {
-    //         listing.SetPlayerInfo(player);
-    //         _listings.Add(listing);
-    //     }
-        
-    // }
 
     private void Update() 
     {
@@ -110,7 +84,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
 
-        // PhotonNetwork.JoinLobby();
+        
         //씬넘기기
         
         PhotonNetwork.JoinOrCreateRoom("schoolRoom", new RoomOptions {MaxPlayers = 10}, null);
@@ -148,11 +122,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Application.Quit();
     }
 
-    // public override void OnJoinedLobby()
-    // {
-    //     SceneManager.LoadScene("CinemachineScene");
-    //     PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
-    // }
+    
     
     public override void OnJoinedRoom()
     {
@@ -225,19 +195,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         SceneManager.LoadScene("CinemachineScene");
     }
-
-    // public void Onclick_ScreenShot()
-    // {
-    //     ScreenCapture.CaptureScreenshot("SomeLevel.png");
-    // }
-
-    // public void Sqawn()
-    // {   
-    //      if (TPSCharacterController.LocalPlayerInstance==null)
-    //      {
-    //          PhotonNetwork.InstantiateRoomObject("Player", Vector3.zero, Quaternion.identity);
-    //      }
-    // }
 
 
     
